@@ -1,565 +1,391 @@
 <!doctype html>
-<html lang="es">
+<html lang="es-AR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>PromotIA · El NPS de tus clientes B2B, mes a mes</title>
-<meta name="description" content="PromotIA mide el NPS de tus clientes B2B mes a mes, analiza la voz del cliente con IA y te arma el plan de acción para subir el score. Un producto de Delenio." />
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexIA — El CRM con IA para distribuidores</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2048%2048%27%3E%3Crect%20width%3D%2748%27%20height%3D%2748%27%20rx%3D%2712%27%20fill%3D%27%2314181F%27%2F%3E%3Cg%20transform%3D%27translate%284%2C4%29%20scale%280.625%29%27%3E%3Cg%20stroke%3D%27%23fff%27%20stroke-width%3D%272.4%27%20opacity%3D%270.6%27%20stroke-linecap%3D%27round%27%3E%3Cline%20x1%3D%2732%27%20y1%3D%2730%27%20x2%3D%2714%27%20y2%3D%2716%27%2F%3E%3Cline%20x1%3D%2732%27%20y1%3D%2730%27%20x2%3D%2724%27%20y2%3D%2750%27%2F%3E%3Cline%20x1%3D%2732%27%20y1%3D%2730%27%20x2%3D%2750%27%20y2%3D%2740%27%2F%3E%3Cline%20x1%3D%2714%27%20y1%3D%2716%27%20x2%3D%2750%27%20y2%3D%2740%27%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2714%27%20cy%3D%2716%27%20r%3D%275%27%20fill%3D%27%23fff%27%2F%3E%3Ccircle%20cx%3D%2724%27%20cy%3D%2750%27%20r%3D%274%27%20fill%3D%27%23fff%27%2F%3E%3Ccircle%20cx%3D%2750%27%20cy%3D%2740%27%20r%3D%275.4%27%20fill%3D%27%23B6FF00%27%2F%3E%3Crect%20x%3D%2725%27%20y%3D%2723%27%20width%3D%2714%27%20height%3D%2712%27%20rx%3D%274.5%27%20fill%3D%27%2314181F%27%20stroke%3D%27%23fff%27%20stroke-width%3D%273%27%2F%3E%3Cpath%20d%3D%27M30%2035L30%2041L35%2035Z%27%20fill%3D%27%23fff%27%2F%3E%3Ccircle%20cx%3D%2732%27%20cy%3D%2729%27%20r%3D%271.6%27%20fill%3D%27%23B6FF00%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#ffffff; --surface:#F7F2FA; --surface2:#FCFAFE; --wash:#F3DCF2;
-  --line:#E7DEEC; --line2:#F1EAF4;
-  --tx:#1A0A1C; --tx2:#5E4E64; --tx3:#A99BB0;
-  --primary:#73017B; --primaryD:#52015A; --magenta:#E40993; --magenta2:#F46BC2; --indigo:#0c01a4;
-  --lila3:#EFD9F1; --lila4:#F7ECF8;
-  --promotor:#1E9E6A; --pasivo:#C9BACF; --detractor:#E5564B;
-  --promotorBg:#E0F3EA; --detractorBg:#FCE7E5;
-  --grad:linear-gradient(120deg,#73017B 0%,#A8108F 55%,#E40993 100%);
-  --gradHero:linear-gradient(125deg,#0c01a4 0%,#52015A 38%,#73017B 64%,#E40993 100%);
-  --disp:'Quicksand','Trebuchet MS',sans-serif;
-  --body:'Archivo','Segoe UI',system-ui,sans-serif;
-  --maxw:1140px;
+  --violet:#14181F; --violet-d:#0E1117; --violet-soft:#F0F1EE;
+  --cyan:#B6FF00; --cyan-soft:#EFFFC9;
+  --ink:#14181F; --muted:#6B7280; --bg:#F5F6F3; --surface:#FFFFFF;
+  --line:#E7E8E2; --amber:#FF9F1C;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:var(--body);color:var(--tx);background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.55;overflow-x:hidden}
-h1,h2,h3,h4,.disp{font-family:var(--disp);letter-spacing:-.02em;line-height:1.08}
+body{font-family:'Manrope',system-ui,sans-serif;color:var(--ink);background:var(--bg);
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:'Sora',sans-serif;letter-spacing:-.02em;line-height:1.12;font-weight:700}
 a{color:inherit;text-decoration:none}
-.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--primary)}
-.eyebrow .dotrow{display:inline-flex;gap:3px}
-.eyebrow .dotrow i{width:7px;height:7px;border-radius:2px;display:block}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.eyebrow{font-weight:700;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--violet)}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:'Manrope';font-weight:700;font-size:15px;
+  padding:13px 22px;border-radius:12px;border:1.5px solid transparent;cursor:pointer;transition:.18s;white-space:nowrap}
+.btn.primary{background:var(--violet);color:#fff;box-shadow:0 12px 26px -12px rgba(79,70,229,.7)}
+.btn.primary:hover{background:var(--violet-d);transform:translateY(-1px)}
+.btn.ghost{background:#fff;border-color:var(--line);color:var(--ink)}
+.btn.ghost:hover{border-color:var(--violet);color:var(--violet)}
 
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--body);font-weight:700;font-size:15px;border-radius:13px;padding:13px 22px;cursor:pointer;border:1px solid transparent;transition:transform .15s ease,box-shadow .15s ease,background .15s}
-.btn svg{width:18px;height:18px}
-.btn-primary{background:var(--grad);color:#fff;box-shadow:0 12px 26px -10px rgba(115,1,123,.6)}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 34px -10px rgba(115,1,123,.7)}
-.btn-ghost{background:#fff;color:var(--tx);border:1px solid var(--line)}
-.btn-ghost:hover{transform:translateY(-2px);border-color:var(--primary);color:var(--primary)}
-.btn-light{background:#fff;color:var(--primary)}
-.btn-light:hover{transform:translateY(-2px)}
-.btn-sm{padding:10px 16px;font-size:14px;border-radius:11px}
+/* nav */
+header{position:sticky;top:0;z-index:40;background:rgba(244,243,251,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Sora';font-weight:800;font-size:21px;letter-spacing:-.04em}
+.logo .mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#2B313C,var(--violet));
+  display:grid;place-items:center;flex-shrink:0}
+.nav-links{display:flex;gap:30px;font-weight:600;font-size:15px;color:var(--muted)}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{display:flex;gap:12px;align-items:center}
+@media(max-width:860px){.nav-links{display:none}.nav-cta .btn.ghost{display:none}}
 
-.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.78);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.nav-in{display:flex;align-items:center;gap:14px;height:66px}
-.brand{display:flex;align-items:center;gap:11px}
-.brand .wm{font-family:var(--disp);font-weight:700;font-size:21px;color:var(--tx);line-height:1}
-.brand .wm b{color:var(--magenta);font-weight:700}
-.brand .wm small{display:block;font-family:var(--body);font-size:9.5px;color:var(--tx3);font-weight:600;letter-spacing:.4px;margin-top:2px}
-.nav-links{display:flex;gap:6px;margin-left:auto}
-.nav-links a{padding:9px 14px;border-radius:10px;font-weight:600;font-size:14.5px;color:var(--tx2);transition:background .15s,color .15s}
-.nav-links a:hover{background:var(--surface);color:var(--primary)}
-.nav-cta{margin-left:8px}
-@media(max-width:860px){.nav-links{display:none}.nav-cta{margin-left:auto}}
+/* hero */
+.hero{padding:84px 0 70px;position:relative;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.hero h1{font-size:54px;font-weight:800;margin:18px 0 20px}
+.hero h1 .grad{color:var(--ink);box-shadow:inset 0 -.26em 0 var(--cyan);border-radius:2px}
+.hero p.lead{font-size:19px;color:var(--muted);max-width:540px;margin-bottom:30px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.hero-note{font-size:13.5px;color:var(--muted);margin-top:16px}
+.hero-note b{color:var(--ink)}
+@media(max-width:880px){.hero-grid{grid-template-columns:1fr;gap:36px}.hero h1{font-size:40px}}
 
-.hero{position:relative;overflow:hidden;padding:84px 0 70px}
-.hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none}
-.blob{position:absolute;border-radius:50%;filter:blur(60px)}
-.blob.b1{width:520px;height:520px;background:radial-gradient(circle,#E40993,transparent 70%);top:-180px;right:-120px;opacity:.28}
-.blob.b2{width:480px;height:480px;background:radial-gradient(circle,#0c01a4,transparent 70%);bottom:-220px;left:-140px;opacity:.18}
-.hero-in{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center}
-.hero h1{font-size:clamp(34px,5vw,56px);font-weight:700;margin:18px 0 0}
-.hero h1 .hl{position:relative;white-space:nowrap}
-.hero h1 .hl::after{content:"";position:absolute;left:-2px;right:-2px;bottom:6px;height:14px;background:linear-gradient(90deg,#F46BC2,#E40993);opacity:.32;z-index:-1;border-radius:4px}
-.hero p.sub{font-size:18.5px;color:var(--tx2);margin:22px 0 0;max-width:540px}
-.hero .cta-row{display:flex;gap:13px;margin-top:30px;flex-wrap:wrap}
-.hero .trust{display:flex;align-items:center;gap:10px;margin-top:26px;font-size:13.5px;color:var(--tx3)}
-.hero .trust .chips{display:inline-flex;gap:3px}
-.hero .trust .chips i{width:13px;height:13px;border-radius:3px;display:block}
-@media(max-width:860px){.hero-in{grid-template-columns:1fr;gap:40px}.hero{padding:54px 0 50px}}
+/* hero visual */
+.visual{position:relative;height:440px}
+.orbit-stage{position:absolute;inset:0;display:grid;place-items:center}
+.orbit{position:absolute;border-radius:50%;border:1.5px solid var(--line)}
+.o1{width:420px;height:420px;animation:spin 36s linear infinite}
+.o2{width:280px;height:280px;border-color:#EFFFC9;animation:spin 24s linear infinite reverse}
+.node{position:absolute;width:14px;height:14px;border-radius:50%;background:#fff;border:2.5px solid var(--violet);top:-7px;left:50%;margin-left:-7px}
+.node.c{border-color:var(--cyan)}
+.node.a{border-color:var(--amber);border-style:dashed}
+.core{width:78px;height:78px;border-radius:50%;background:linear-gradient(135deg,#2B313C,var(--violet));
+  display:grid;place-items:center;color:#fff;font-family:'Sora';font-weight:700;font-size:15px;
+  box-shadow:0 16px 40px -12px rgba(79,70,229,.6);z-index:2}
+.float-card{position:absolute;background:#fff;border:1px solid var(--line);border-radius:16px;
+  box-shadow:0 24px 50px -20px rgba(20,21,43,.28);padding:14px 16px;z-index:3}
+.fc-today{top:14px;right:-6px;width:268px}
+.fc-today .h{display:flex;align-items:center;gap:7px;font-family:'Sora';font-weight:700;font-size:14px;margin-bottom:10px}
+.fc-row{display:flex;align-items:center;gap:9px;padding:8px;border-radius:10px;background:var(--bg);margin-bottom:7px}
+.chip{font-size:9.5px;font-weight:700;padding:3px 7px;border-radius:6px;text-transform:uppercase;letter-spacing:.03em}
+.chip.v{background:var(--violet-soft);color:var(--violet)}
+.chip.c{background:#E4F7EE;color:#18B26A}
+.chip.a{background:#FFF3E2;color:#B9740A}
+.fc-row span{font-size:12px;font-weight:600}
+.fc-kpi{bottom:18px;left:-8px;width:210px;display:flex;gap:14px}
+.fc-kpi .k b{font-family:'Sora';font-size:22px;display:block;line-height:1.1}
+.fc-kpi .k small{font-size:11px;color:var(--muted)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.net-stage{position:absolute;inset:0;width:100%;height:100%}
+.net-stage .pulse{animation:nodepulse 3.2s ease-in-out infinite;transform-origin:center;transform-box:fill-box}
+@keyframes nodepulse{0%,100%{opacity:1}50%{opacity:.5}}
+@media(max-width:880px){.visual{height:360px}.o1{width:330px;height:330px}.o2{width:220px;height:220px}.fc-today{right:0;width:240px}}
+@media(prefers-reduced-motion:reduce){.o1,.o2{animation:none}.net-stage .pulse{animation:none}}
 
-.card{background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 30px 60px -30px rgba(115,1,123,.35)}
-.hero-card{padding:26px}
-.hero-card .hc-top{display:flex;align-items:center;gap:9px;margin-bottom:6px}
-.hero-card .hc-top .tag{margin-left:auto;font-size:11px;font-weight:700;color:var(--primary);background:var(--lila3);padding:3px 10px;border-radius:20px}
-.hero-card .hc-label{font-size:13px;color:var(--tx2);font-weight:600}
-.gauge-wrap{text-align:center;margin-top:4px}
-.gauge-score{font-family:var(--disp);font-weight:700;font-size:50px;line-height:1;color:var(--promotor);margin-top:-6px}
-.gauge-band{display:inline-block;margin-top:8px;font-size:12px;font-weight:700;color:var(--promotor);background:var(--promotorBg);padding:3px 12px;border-radius:20px}
-.dist{margin-top:20px}
-.dist-bar{display:flex;height:14px;border-radius:20px;overflow:hidden}
-.dist-legend{display:flex;justify-content:space-between;margin-top:11px;font-size:12px;color:var(--tx2)}
-.dist-legend span{display:inline-flex;align-items:center;gap:6px}
-.dist-legend i{width:10px;height:10px;border-radius:3px}
-.spark{display:flex;align-items:flex-end;gap:5px;height:46px;margin-top:18px;padding-top:14px;border-top:1px solid var(--line2)}
-.spark .bar{flex:1;background:linear-gradient(180deg,#E40993,#73017B);border-radius:4px 4px 0 0;opacity:.85}
+/* value strip */
+.values{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:8px 0 76px}
+.vcard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px}
+.vcard .ic{width:42px;height:42px;border-radius:11px;background:var(--violet-soft);display:grid;place-items:center;margin-bottom:14px}
+.vcard h3{font-size:18px;margin-bottom:7px}
+.vcard p{font-size:14.5px;color:var(--muted)}
+@media(max-width:860px){.values{grid-template-columns:1fr}}
 
-.method{background:var(--tx);color:#fff;padding:54px 0;position:relative;overflow:hidden}
-.method::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% -20%,rgba(228,9,147,.28),transparent 55%)}
-.method-in{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
-.method h2{font-size:clamp(26px,3.4vw,36px);font-weight:700;color:#fff}
-.method p{color:rgba(255,255,255,.78);font-size:16.5px;margin-top:16px;max-width:460px}
-.method .eyebrow{color:var(--magenta2)}
-.q-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:26px}
-.q-card .q{font-family:var(--disp);font-weight:600;font-size:19px;color:#fff;line-height:1.3}
-.q-card .q b{color:var(--magenta2)}
-.scale{display:flex;gap:6px;margin-top:22px}
-.scale .n{flex:1;aspect-ratio:1;border-radius:9px;display:grid;place-items:center;font-weight:700;font-size:15px;color:#fff;font-family:var(--disp)}
-.scale-legend{display:flex;justify-content:space-between;margin-top:12px;font-size:11.5px;color:rgba(255,255,255,.6);font-weight:600}
-@media(max-width:760px){.method-in{grid-template-columns:1fr;gap:30px}.scale .n{font-size:12px;border-radius:7px}}
+/* sections */
+section.block{padding:80px 0}
+.section-head{max-width:680px;margin-bottom:44px}
+.section-head h2{font-size:38px;margin:14px 0 12px}
+.section-head p{font-size:18px;color:var(--muted)}
 
-.sec{padding:78px 0}
-.sec-head{max-width:680px}
-.sec-head h2{font-size:clamp(27px,3.6vw,40px);font-weight:700;margin-top:14px}
-.sec-head p{font-size:17.5px;color:var(--tx2);margin-top:16px}
-.divider-rule{display:flex;height:5px;border-radius:20px;overflow:hidden;max-width:120px;margin-top:18px}
+/* pillars */
+.pillar{margin-bottom:56px}
+.pillar-top{display:flex;align-items:baseline;gap:14px;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.pillar-top .num{font-family:'Sora';font-weight:800;font-size:15px;color:var(--violet)}
+.pillar-top h3{font-size:24px}
+.pillar-top p{color:var(--muted);font-size:15px;margin-left:auto;max-width:380px;text-align:right}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.feat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;transition:.18s}
+.feat:hover{border-color:#DCDDD6;box-shadow:0 16px 34px -22px rgba(79,70,229,.45);transform:translateY(-2px)}
+.feat .ic{width:40px;height:40px;border-radius:11px;background:var(--violet-soft);display:grid;place-items:center;margin-bottom:14px}
+.feat.cy .ic{background:var(--cyan-soft)}
+.feat.am .ic{background:#FFF3E2}
+.feat h4{font-size:16.5px;margin-bottom:7px}
+.feat p{font-size:14px;color:var(--muted)}
+@media(max-width:920px){.feat-grid{grid-template-columns:1fr 1fr}.pillar-top p{display:none}}
+@media(max-width:600px){.feat-grid{grid-template-columns:1fr}}
 
-.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:46px}
-.feat{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;transition:transform .18s ease,box-shadow .18s ease}
-.feat:hover{transform:translateY(-4px);box-shadow:0 22px 44px -24px rgba(115,1,123,.4)}
-.feat .ic{display:grid;place-items:center;width:46px;height:46px;border-radius:13px;background:var(--lila3);color:var(--primary);margin-bottom:16px}
-.feat .ic svg{width:23px;height:23px}
-.feat h3{font-size:18.5px;font-weight:700}
-.feat p{font-size:14.5px;color:var(--tx2);margin-top:9px}
-@media(max-width:860px){.feat-grid{grid-template-columns:1fr}}
+/* spotlight bank engine */
+.spotlight{background:linear-gradient(135deg,#14181F,#1F242E);border-radius:28px;color:#fff;
+  padding:54px;display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center;overflow:hidden;position:relative}
+.spotlight .eyebrow{color:#B6FF00}
+.spotlight h2{font-size:34px;color:#fff;margin:14px 0 16px}
+.spotlight p{color:#C9CDD4;font-size:16.5px;margin-bottom:14px}
+.spot-flow{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:22px}
+.spot-step{display:flex;gap:13px;align-items:flex-start;padding:11px 0}
+.spot-step:not(:last-child){border-bottom:1px solid rgba(255,255,255,.1)}
+.spot-step .n{width:26px;height:26px;border-radius:8px;background:rgba(143,240,200,.16);color:#B6FF00;
+  font-family:'Sora';font-weight:700;font-size:13px;display:grid;place-items:center;flex-shrink:0}
+.spot-step b{display:block;font-size:14.5px;color:#fff;margin-bottom:2px}
+.spot-step span{font-size:13px;color:#B9BDC4}
+@media(max-width:880px){.spotlight{grid-template-columns:1fr;padding:36px}}
 
-.how{background:var(--surface)}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:46px}
-.step{position:relative;background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px}
-.step .num{font-family:var(--disp);font-weight:700;font-size:15px;color:#fff;background:var(--grad);width:38px;height:38px;border-radius:11px;display:grid;place-items:center;margin-bottom:16px}
-.step h3{font-size:18px;font-weight:700}
-.step p{font-size:14.5px;color:var(--tx2);margin-top:9px}
-@media(max-width:860px){.steps{grid-template-columns:1fr}}
+/* how */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.step{position:relative;padding-top:8px}
+.step .n{font-family:'Sora';font-weight:800;font-size:40px;color:var(--violet);opacity:.25;line-height:1}
+.step h4{font-size:19px;margin:8px 0 8px}
+.step p{color:var(--muted);font-size:15px}
+@media(max-width:780px){.steps{grid-template-columns:1fr}}
 
-.showcase-card{margin-top:46px;background:linear-gradient(160deg,#fff,#FBF5FC);border:1px solid var(--line);border-radius:24px;padding:30px;box-shadow:0 36px 70px -36px rgba(115,1,123,.4)}
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.kpi{border-radius:16px;padding:16px 16px 14px;background:var(--gradHero);color:#fff;position:relative;overflow:hidden}
-.kpi::after{content:"";position:absolute;right:-20px;top:-20px;width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.12)}
-.kpi .kl{font-size:12px;opacity:.9;font-weight:600}
-.kpi .kv{font-family:var(--disp);font-size:28px;font-weight:700;margin-top:8px}
-.kpi.alt{background:linear-gradient(160deg,#1A0A1C,#3a2440)}
-.showcase-charts{display:grid;grid-template-columns:1fr 1.4fr;gap:16px;margin-top:16px}
-.mini{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}
-.mini h4{font-size:13.5px;font-weight:700;color:var(--tx);margin-bottom:12px}
-.segbar{margin:11px 0}
-.segbar .top{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:6px}
-.segbar .top b{font-weight:700}
-.segtrack{height:8px;border-radius:20px;background:var(--line2);overflow:hidden}
-.segtrack i{display:block;height:100%;border-radius:20px}
-.barsrow{display:flex;align-items:flex-end;gap:10px;height:150px;padding-top:10px}
-.barsrow .col{flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;height:100%;justify-content:flex-end}
-.barsrow .col .bb{width:100%;border-radius:6px 6px 0 0;background:linear-gradient(180deg,#E40993,#73017B)}
-.barsrow .col span{font-size:11px;color:var(--tx3);font-weight:600}
-@media(max-width:760px){.kpis{grid-template-columns:1fr 1fr}.showcase-charts{grid-template-columns:1fr}}
+/* pricing */
+.pricing{background:#fff;border-radius:28px;border:1px solid var(--line);padding:14px}
+.price-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.plan{padding:38px}
+.plan:first-child{border-right:1px solid var(--line)}
+.plan .tier{font-family:'Sora';font-weight:700;font-size:14px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.plan.pro .tier{color:var(--violet)}
+.plan .price{display:flex;align-items:flex-end;gap:6px;margin:14px 0 4px}
+.plan .price b{font-family:'Sora';font-weight:800;font-size:48px;letter-spacing:-2px}
+.plan .price span{color:var(--muted);font-weight:600;font-size:15px;padding-bottom:9px}
+.plan .desc{color:var(--muted);font-size:14.5px;margin-bottom:22px;min-height:42px}
+.plan ul{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:26px}
+.plan li{display:flex;gap:10px;font-size:14.5px;align-items:flex-start}
+.plan li svg{flex-shrink:0;margin-top:3px}
+.plan.pro{position:relative;background:linear-gradient(180deg,#FAFBF8,#fff);border-radius:20px}
+.badge-rec{position:absolute;top:-13px;right:28px;background:var(--violet);color:#fff;font-size:11.5px;
+  font-weight:700;padding:5px 13px;border-radius:20px;letter-spacing:.02em}
+.plan .inc{font-size:13px;font-weight:700;color:var(--violet);margin-bottom:11px}
+@media(max-width:780px){.price-grid{grid-template-columns:1fr}.plan:first-child{border-right:none;border-bottom:1px solid var(--line)}}
+.enterprise{text-align:center;margin-top:22px;color:var(--muted);font-size:15px}
+.enterprise a{color:var(--violet);font-weight:700}
 
-.eco{background:var(--gradHero);color:#fff;border-radius:24px;padding:42px;display:grid;grid-template-columns:1.1fr 1fr;gap:36px;align-items:center;position:relative;overflow:hidden}
-.eco::after{content:"";position:absolute;right:-60px;bottom:-80px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.08)}
-.eco h2{font-size:clamp(24px,3vw,32px);color:#fff}
-.eco p{color:rgba(255,255,255,.82);margin-top:14px;font-size:16px}
-.units{display:flex;flex-wrap:wrap;gap:9px;position:relative}
-.unit{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:11px;padding:10px 14px;font-weight:600;font-size:13.5px;display:inline-flex;align-items:center;gap:8px}
-.unit i{width:9px;height:9px;border-radius:3px;display:block}
-@media(max-width:760px){.eco{grid-template-columns:1fr;padding:30px}}
+/* final cta */
+.final{text-align:center;padding:90px 0}
+.final h2{font-size:42px;margin-bottom:16px}
+.final p{font-size:19px;color:var(--muted);max-width:520px;margin:0 auto 30px}
 
-.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:46px;align-items:stretch}
-.plan{background:#fff;border:1px solid var(--line);border-radius:20px;padding:28px;display:flex;flex-direction:column}
-.plan.feat-plan{border:2px solid var(--primary);box-shadow:0 30px 60px -30px rgba(115,1,123,.45);position:relative}
-.plan.feat-plan .ribbon{position:absolute;top:-13px;left:28px;background:var(--grad);color:#fff;font-size:11.5px;font-weight:700;padding:4px 12px;border-radius:20px}
-.plan .pname{font-family:var(--disp);font-weight:700;font-size:20px}
-.plan .pdesc{font-size:13.5px;color:var(--tx2);margin-top:6px;min-height:38px}
-.plan .pprice{margin:18px 0 4px;font-family:var(--disp)}
-.plan .pprice .amt{font-size:38px;font-weight:700}
-.plan .pprice .per{font-size:14px;color:var(--tx3);font-weight:600}
-.plan ul{list-style:none;margin:18px 0 22px;display:flex;flex-direction:column;gap:11px}
-.plan li{display:flex;gap:10px;font-size:14px;color:var(--tx2)}
-.plan li svg{width:18px;height:18px;color:var(--promotor);flex-shrink:0;margin-top:1px}
-.plan .btn{margin-top:auto;width:100%}
-@media(max-width:860px){.price-grid{grid-template-columns:1fr}}
-.price-note{text-align:center;font-size:13px;color:var(--tx3);margin-top:18px}
-
-.faq{max-width:760px;margin:46px auto 0}
-.qa{border:1px solid var(--line);border-radius:14px;margin-bottom:12px;background:#fff;overflow:hidden}
-.qa summary{list-style:none;cursor:pointer;padding:18px 20px;font-weight:700;font-size:16px;font-family:var(--disp);display:flex;align-items:center;gap:12px}
-.qa summary::-webkit-details-marker{display:none}
-.qa summary .pm{margin-left:auto;width:22px;height:22px;flex-shrink:0;transition:transform .2s;color:var(--primary)}
-.qa[open] summary .pm{transform:rotate(45deg)}
-.qa .ans{padding:0 20px 18px;color:var(--tx2);font-size:14.5px}
-
-.ctaband{margin:0 24px}
-.ctaband-in{max-width:var(--maxw);margin:0 auto;background:var(--grad);border-radius:26px;padding:54px;text-align:center;color:#fff;position:relative;overflow:hidden}
-.ctaband-in::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 120%,rgba(12,1,164,.5),transparent 50%)}
-.ctaband-in h2{position:relative;font-size:clamp(26px,3.4vw,38px);color:#fff}
-.ctaband-in p{position:relative;color:rgba(255,255,255,.88);font-size:17px;margin:14px auto 0;max-width:520px}
-.ctaband-in .cta-row{position:relative;display:flex;gap:13px;justify-content:center;margin-top:28px;flex-wrap:wrap}
-
-.foot{padding:54px 0 40px;border-top:1px solid var(--line);margin-top:80px}
-.foot-in{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px}
-.foot p{font-size:14px;color:var(--tx2);margin-top:14px;max-width:330px}
-.foot h5{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--tx3);font-weight:700;margin-bottom:12px}
-.foot a{display:block;color:var(--tx2);font-size:14px;padding:5px 0}
-.foot a:hover{color:var(--primary)}
-.foot-bottom{margin-top:40px;padding-top:22px;border-top:1px solid var(--line2);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px;color:var(--tx3)}
-@media(max-width:760px){.foot-in{grid-template-columns:1fr 1fr}.ctaband-in{padding:38px 24px}}
-
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s cubic-bezier(.2,.7,.3,1),transform .6s cubic-bezier(.2,.7,.3,1)}
-.reveal.in{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
-:focus-visible{outline:3px solid var(--magenta2);outline-offset:2px;border-radius:6px}
-</style>
+/* footer */
+footer{background:#fff;border-top:1px solid var(--line);padding:40px 0}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.foot small{color:var(--muted);font-size:13.5px}
+.foot .logo{font-size:18px}
+.btn.neon{background:var(--cyan);color:var(--ink);box-shadow:0 12px 26px -12px rgba(182,255,0,.55)}.btn.neon:hover{background:#9BDB00;transform:translateY(-1px)}</style>
 </head>
 <body>
 
-<header class="nav">
-  <div class="wrap nav-in">
-    <a class="brand" href="#top" aria-label="PromotIA inicio">
-      <svg width="40" height="40" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-        <defs><linearGradient id="pg" x1="0" y1="48" x2="48" y2="0"><stop offset="0" stop-color="#52015A"/><stop offset=".5" stop-color="#A8108F"/><stop offset="1" stop-color="#E40993"/></linearGradient></defs>
-        <rect x="1.5" y="1.5" width="45" height="45" rx="13" fill="url(#pg)"/>
-        <path d="M14 16h20a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H22l-6 5v-5h-2a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3Z" fill="#fff" opacity=".94"/>
-        <path d="M24 28.5l-4.2-4c-1.2-1.15-1.1-3 .2-3.9 1.05-.72 2.45-.45 3.25.5l.75.9.75-.9c.8-.95 2.2-1.22 3.25-.5 1.3.9 1.4 2.75.2 3.9L24 28.5Z" fill="#E40993"/>
-      </svg>
-      <span class="wm">Promot<b>IA</b><small>NPS B2B · by Delenio</small></span>
-    </a>
-    <nav class="nav-links">
-      <a href="#producto">Producto</a>
+<header>
+  <div class="wrap"><nav>
+    <div class="logo">
+      <span class="mark"><svg width="22" height="22" viewBox="0 0 64 64"><g stroke="#fff" stroke-width="1.7" opacity=".55" stroke-linecap="round"><line x1="32" y1="29" x2="12" y2="12"/><line x1="32" y1="29" x2="8" y2="34"/><line x1="32" y1="29" x2="22" y2="52"/><line x1="32" y1="29" x2="52" y2="42"/><line x1="12" y1="12" x2="44" y2="10"/><line x1="52" y1="42" x2="54" y2="20"/><line x1="22" y1="52" x2="52" y2="42"/></g><circle cx="12" cy="12" r="4.5" fill="#fff"/><circle cx="44" cy="10" r="3" fill="#fff"/><circle cx="8" cy="34" r="3" fill="#fff"/><circle cx="22" cy="52" r="3.5" fill="#fff"/><circle cx="54" cy="20" r="2.4" fill="#fff"/><circle cx="52" cy="42" r="4.2" fill="#B6FF00"/><rect x="24" y="22" width="16" height="13" rx="5" fill="#14181F" stroke="#fff" stroke-width="3"/><path d="M29 35 L29 41 L35 35 Z" fill="#fff"/><circle cx="32" cy="28" r="1.7" fill="#B6FF00"/></svg></span>
+      NexIA
+    </div>
+    <div class="nav-links">
+      <a href="#funciones">Funciones</a>
+      <a href="#ia">IA</a>
       <a href="#como">Cómo funciona</a>
       <a href="#precios">Precios</a>
-      <a href="#faq">FAQ</a>
-    </nav>
-    <a class="btn btn-primary btn-sm nav-cta" href="#demo">Pedir una demo</a>
-  </div>
+    </div>
+    <div class="nav-cta">
+      <a class="btn primary neon" href="https://app.nexia.talenio.tech/">Ingresar</a>
+    </div>
+  </nav></div>
 </header>
 
-<main id="top">
-
-<section class="hero">
-  <div class="hero-bg"><span class="blob b1"></span><span class="blob b2"></span></div>
-  <div class="wrap hero-in">
-    <div>
-      <span class="eyebrow"><span class="dotrow"><i style="background:var(--detractor)"></i><i style="background:var(--pasivo)"></i><i style="background:var(--promotor)"></i></span> NPS B2B · medición mensual</span>
-      <h1>Enterate quién te recomienda, <span class="hl">antes de que se vaya</span>.</h1>
-      <p class="sub">PromotIA mide el NPS de tus clientes B2B mes a mes, te muestra qué piensan tus promotores y detractores, y te arma el plan para subir el score. Una sola pregunta, la metodología de siempre.</p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="#demo">Pedir una demo
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="btn btn-ghost" href="#como">Ver cómo funciona</a>
-      </div>
-      <div class="trust">
-        <span class="chips"><i style="background:var(--detractor)"></i><i style="background:var(--pasivo)"></i><i style="background:var(--promotor)"></i></span>
-        Metodología NPS estándar · Dashboards en tiempo real · IA para el plan de acción
-      </div>
+<!-- HERO -->
+<section class="hero"><div class="wrap"><div class="hero-grid">
+  <div>
+    <span class="eyebrow">El CRM con IA para distribuidores</span>
+    <h1>Tu negocio de distribución, <span class="grad">en red.</span></h1>
+    <p class="lead">NexIA ordena tus prospectos, tu cartera de clientes y toda tu red multinivel. Y cada mañana la IA te dice a quién contactar, qué escribirle y a quién acompañar. Vos vendés; lo demás se simplifica.</p>
+    <div class="hero-cta">
+      <a class="btn primary neon" href="https://app.nexia.talenio.tech/">Ingresar</a>
+      <a class="btn ghost" href="#como">Ver cómo funciona</a>
     </div>
-
-    <div class="card hero-card reveal">
-      <div class="hc-top">
-        <span class="hc-label">Net Promoter Score</span>
-        <span class="tag">Junio 2026</span>
-      </div>
-      <div class="gauge-wrap">
-        <svg width="240" height="134" viewBox="0 0 240 134" role="img" aria-label="Gauge de NPS en +52">
-          <path d="M28 116 A92 92 0 0 1 212 116" fill="none" stroke="var(--line2)" stroke-width="16" stroke-linecap="round"/>
-          <path id="gArc" d="M28 116 A92 92 0 0 1 212 116" fill="none" stroke="var(--promotor)" stroke-width="16" stroke-linecap="round" stroke-dasharray="289" stroke-dashoffset="289"/>
-          <line id="gNeedle" x1="120" y1="116" x2="120" y2="40" stroke="var(--tx)" stroke-width="3.5" stroke-linecap="round" transform="rotate(-90 120 116)" style="transition:transform 1.4s cubic-bezier(.2,.8,.2,1)"/>
-          <circle cx="120" cy="116" r="6.5" fill="var(--tx)"/>
-          <text x="24" y="132" font-size="10" fill="var(--tx3)">-100</text>
-          <text x="198" y="132" font-size="10" fill="var(--tx3)">+100</text>
-        </svg>
-        <div class="gauge-score" id="gScore">+0</div>
-        <span class="gauge-band">Bueno</span>
-      </div>
-      <div class="dist">
-        <div class="dist-bar">
-          <i style="background:var(--detractor);width:18%"></i>
-          <i style="background:var(--pasivo);width:30%"></i>
-          <i style="background:var(--promotor);width:52%"></i>
-        </div>
-        <div class="dist-legend">
-          <span><i style="background:var(--detractor)"></i>Detractores 18%</span>
-          <span><i style="background:var(--pasivo)"></i>Pasivos 30%</span>
-          <span><i style="background:var(--promotor)"></i>Promotores 52%</span>
-        </div>
-      </div>
-      <div class="spark" aria-hidden="true">
-        <span class="bar" style="height:40%"></span><span class="bar" style="height:52%"></span>
-        <span class="bar" style="height:46%"></span><span class="bar" style="height:64%"></span>
-        <span class="bar" style="height:58%"></span><span class="bar" style="height:74%"></span>
-        <span class="bar" style="height:82%"></span><span class="bar" style="height:92%"></span>
-      </div>
+    <p class="hero-note">Pensado para el modelo de <b>venta directa y redes multinivel</b>.</p>
+  </div>
+  <div class="visual">
+    <svg class="net-stage" viewBox="0 0 420 420" aria-hidden="true">
+      <circle cx="210" cy="205" r="120" fill="#14181F" opacity="0.05"/>
+      <g stroke="#14181F" stroke-width="2" opacity="0.4" stroke-linecap="round">
+        <line x1="210" y1="205" x2="78" y2="92"/><line x1="210" y1="205" x2="300" y2="74"/>
+        <line x1="210" y1="205" x2="95" y2="206"/><line x1="210" y1="205" x2="338" y2="262"/>
+        <line x1="210" y1="205" x2="250" y2="356"/>
+        <line x1="78" y1="92" x2="150" y2="56"/><line x1="150" y1="56" x2="300" y2="74"/>
+        <line x1="300" y1="74" x2="360" y2="150"/><line x1="338" y1="262" x2="360" y2="150"/>
+        <line x1="95" y1="206" x2="122" y2="330"/><line x1="122" y1="330" x2="250" y2="356"/>
+        <line x1="338" y1="262" x2="300" y2="312"/><line x1="250" y1="356" x2="300" y2="312"/>
+      </g>
+      <circle cx="78" cy="92" r="13" fill="#14181F"/>
+      <circle cx="150" cy="56" r="9" fill="#14181F"/>
+      <circle cx="300" cy="74" r="12" fill="#B6FF00" class="pulse"/>
+      <circle cx="360" cy="150" r="9" fill="#14181F"/>
+      <circle cx="95" cy="206" r="11" fill="#14181F"/>
+      <circle cx="338" cy="262" r="13" fill="#B6FF00" class="pulse"/>
+      <circle cx="122" cy="330" r="10" fill="#14181F"/>
+      <circle cx="250" cy="356" r="12" fill="#14181F"/>
+      <circle cx="300" cy="312" r="9" fill="#14181F"/>
+      <circle cx="210" cy="205" r="27" fill="#14181F"/>
+      <circle cx="210" cy="205" r="9" fill="#fff"/>
+    </svg>
+    <div class="float-card fc-today">
+      <div class="h"><svg width="16" height="16" viewBox="0 0 20 20"><path d="M11 2 4 12h5l-1 6 7-10h-5z" fill="#FF9F1C"/></svg> Tu día · priorizado por IA</div>
+      <div class="fc-row"><span class="chip v">demo</span><span>Confirmar demo · Carla</span></div>
+      <div class="fc-row"><span class="chip a">filtro</span><span>Recompra · María (Galicia)</span></div>
+      <div class="fc-row"><span class="chip c">red</span><span>Acompañar · Valeria</span></div>
+    </div>
+    <div class="float-card fc-kpi">
+      <div class="k"><b>$1,2M</b><small>Ventas del mes</small></div>
+      <div class="k"><b>12</b><small>En tu red</small></div>
     </div>
   </div>
-</section>
+</div></div></section>
 
-<section class="method">
-  <div class="wrap method-in">
-    <div class="reveal">
-      <span class="eyebrow">Una sola pregunta</span>
-      <h2>La metodología NPS, sin vueltas.</h2>
-      <p>Nada de cuestionarios eternos. Una pregunta de 0 a 10 y un comentario abierto. PromotIA clasifica solo a tus clientes en detractores, pasivos y promotores, y calcula el score como manda el método.</p>
-    </div>
-    <div class="q-card reveal">
-      <div class="q">En una escala de 0 a 10, ¿qué tan probable es que recomiendes <b>tu empresa</b> a un colega o socio?</div>
-      <div class="scale" id="scale"></div>
-      <div class="scale-legend"><span>0 · Detractores · 6</span><span>7 · Pasivos · 8</span><span>9 · Prom. · 10</span></div>
-    </div>
+<!-- VALUES -->
+<div class="wrap"><div class="values">
+  <div class="vcard">
+    <div class="ic"><svg width="22" height="22" viewBox="0 0 20 20"><path d="M11 2 4 12h5l-1 6 7-10h-5z" fill="#14181F"/></svg></div>
+    <h3>Sabé qué hacer hoy</h3>
+    <p>El Coach IA arma tu lista de acciones del día con el porqué claro. Se acabó el “¿a quién le escribo?”.</p>
   </div>
-</section>
+  <div class="vcard">
+    <div class="ic"><svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="7.5" fill="none" stroke="#14181F" stroke-width="2"/><path d="M11 7v4l3 2" stroke="#14181F" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <h3>No se te escapa una recompra</h3>
+    <p>NexIA calcula el cambio de cada purificador y te avisa a tiempo. Retención e ingreso recurrente, en piloto.</p>
+  </div>
+  <div class="vcard">
+    <div class="ic"><svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="3" fill="#14181F"/><circle cx="4" cy="5" r="2.4" fill="none" stroke="#14181F" stroke-width="1.8"/><circle cx="18" cy="6" r="2.4" fill="none" stroke="#14181F" stroke-width="1.8"/><circle cx="16" cy="17" r="2.4" fill="none" stroke="#14181F" stroke-width="1.8"/><path d="M6 6 9 9M16 8l-4 2M14 15l-2-3" stroke="#DCDDD6" stroke-width="1.6"/></svg></div>
+    <h3>Hacé crecer (y cuidá) tu red</h3>
+    <p>La IA detecta quién está por aflojar y a quién conviene promover. Liderás con datos, no con intuición.</p>
+  </div>
+</div></div>
 
-<section class="sec" id="producto">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow">Producto</span>
-      <h2>Todo lo que necesitás para mover la aguja.</h2>
-      <p>Del dato suelto a la decisión: PromotIA mide, analiza la voz real de tus clientes y te dice qué hacer.</p>
-      <div class="divider-rule"><i style="background:var(--detractor);flex:0 0 28%"></i><i style="background:var(--pasivo);flex:0 0 30%"></i><i style="background:var(--promotor);flex:1"></i></div>
-    </div>
+<!-- FUNCIONES -->
+<section class="block" id="funciones"><div class="wrap">
+  <div class="section-head">
+    <span class="eyebrow">Todo tu negocio en un lugar</span>
+    <h2>15 herramientas, una sola app</h2>
+    <p>Desde el primer contacto hasta la recompra y el crecimiento de tu organización. Organizadas en cuatro pilares.</p>
+  </div>
+
+  <!-- Pilar 1 -->
+  <div class="pillar">
+    <div class="pillar-top"><span class="num">01</span><h3>Tu día, resuelto por IA</h3><p>La inteligencia que te saca de encima el trabajo de pensar y redactar.</p></div>
     <div class="feat-grid">
-      <div class="feat reveal">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
-        <h3>Medición mensual</h3>
-        <p>Cargás las respuestas por Excel o a mano y tenés el NPS del mes al instante. Sin planillas que se rompen.</p>
-      </div>
-      <div class="feat reveal">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg></div>
-        <h3>Dashboard de verdad</h3>
-        <p>Promotores vs. detractores, evolución mes a mes, y NPS abierto por segmento y sector. La foto y la película.</p>
-      </div>
-      <div class="feat reveal">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-        <h3>Voz del cliente con IA</h3>
-        <p>La IA lee todos los comentarios y los agrupa en impulsores y dolores, con ejemplos reales. Dejá de leer 300 respuestas a mano.</p>
-      </div>
-      <div class="feat reveal">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
-        <h3>Plan de acción con IA</h3>
-        <p>Iniciativas concretas para reducir detractores y subir el score, con objetivo, responsable, indicador y plazo. Editable.</p>
-      </div>
-      <div class="feat reveal">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 16l-4 4-4-4M12 20V10M20 7l-2-3H6L4 7M4 7h16v11a2 2 0 0 1-2 2"/></svg></div>
-        <h3>Tu contexto manda</h3>
-        <p>Cargás tus productos y servicios y la IA conecta cada comentario con una causa y una solución de tu propio negocio.</p>
-      </div>
-      <div class="feat reveal">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg></div>
-        <h3>Doble portal</h3>
-        <p>Un panel para vos y un portal limpio para cada cliente o unidad. Cada uno ve lo suyo, sin ruido.</p>
-      </div>
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M11 2 4 12h5l-1 6 7-10h-5z" fill="#14181F"/></svg></div><h4>Coach IA — “Tu día”</h4><p>Lista priorizada cada mañana: prospectos calientes sin contactar, demos a confirmar, filtros por vencer y red a acompañar. Con el motivo a la vista, no caja negra.</p></div>
+      <div class="feat cy"><div class="ic"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M3 4h14v9H7l-4 3z" fill="none" stroke="#14181F" stroke-width="1.8" stroke-linejoin="round"/></svg></div><h4>Mensajes WhatsApp IA</h4><p>Seguimientos, invitación a demo, post-demo, recompra e invitación al negocio. Maneja objeciones (“es caro”, “lo pienso”) y arma el guion de demo. Tono ajustable, listo para enviar.</p></div>
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 20 20"><rect x="3" y="4" width="14" height="13" rx="2" fill="none" stroke="#14181F" stroke-width="1.8"/><path d="M3 8h14M7 2v3M13 2v3" stroke="#14181F" stroke-width="1.8" stroke-linecap="round"/></svg></div><h4>Agenda y tareas</h4><p>Recordatorios y tareas —seguimientos, demos, llamados— generados por el Coach IA o cargados a mano. Nada queda en la cabeza.</p></div>
     </div>
   </div>
-</section>
 
-<section class="sec how" id="como">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow">Cómo funciona</span>
-      <h2>De la encuesta al plan, en tres pasos.</h2>
-      <p>Sin implementación eterna. Arrancás esta semana.</p>
-    </div>
-    <div class="steps">
-      <div class="step reveal">
-        <div class="num">1</div>
-        <h3>Cargás las respuestas</h3>
-        <p>Descargás la plantilla, sumás el puntaje 0-10 y el comentario de cada cliente B2B, y la subís. Las columnas se mapean solas.</p>
-      </div>
-      <div class="step reveal">
-        <div class="num">2</div>
-        <h3>Mirás el tablero</h3>
-        <p>Aparece el NPS del mes, la distribución, la tendencia y el corte por segmento. Todo actualizado al instante.</p>
-      </div>
-      <div class="step reveal">
-        <div class="num">3</div>
-        <h3>Recibís el plan</h3>
-        <p>La IA analiza la voz del cliente y te propone el plan de acción para el mes. Lo ajustás y lo bajás a tu equipo.</p>
-      </div>
-    </div>
-
-    <div class="showcase-card reveal">
-      <div class="kpis">
-        <div class="kpi"><div class="kl">NPS del período</div><div class="kv">+52</div></div>
-        <div class="kpi alt"><div class="kl">Promotores</div><div class="kv">52%</div></div>
-        <div class="kpi"><div class="kl">Detractores</div><div class="kv">18%</div></div>
-        <div class="kpi alt"><div class="kl">Respuestas</div><div class="kv">214</div></div>
-      </div>
-      <div class="showcase-charts">
-        <div class="mini">
-          <h4>NPS por segmento</h4>
-          <div class="segbar"><div class="top"><span>Enterprise</span><b style="color:var(--promotor)">+61</b></div><div class="segtrack"><i style="width:80%;background:var(--promotor)"></i></div></div>
-          <div class="segbar"><div class="top"><span>Mid-Market</span><b style="color:var(--promotor)">+48</b></div><div class="segtrack"><i style="width:74%;background:var(--promotor)"></i></div></div>
-          <div class="segbar"><div class="top"><span>SMB</span><b style="color:var(--primary)">+33</b></div><div class="segtrack"><i style="width:66%;background:var(--primary)"></i></div></div>
-        </div>
-        <div class="mini">
-          <h4>Evolución mensual</h4>
-          <div class="barsrow">
-            <div class="col"><div class="bb" style="height:40%"></div><span>Ene</span></div>
-            <div class="col"><div class="bb" style="height:46%"></div><span>Feb</span></div>
-            <div class="col"><div class="bb" style="height:54%"></div><span>Mar</span></div>
-            <div class="col"><div class="bb" style="height:60%"></div><span>Abr</span></div>
-            <div class="col"><div class="bb" style="height:72%"></div><span>May</span></div>
-            <div class="col"><div class="bb" style="height:86%"></div><span>Jun</span></div>
-          </div>
-        </div>
-      </div>
+  <!-- Pilar 2 -->
+  <div class="pillar">
+    <div class="pillar-top"><span class="num">02</span><h3>Vendé y registrá todo</h3><p>El pipeline, la cartera de clientes y los números, sin planillas.</p></div>
+    <div class="feat-grid">
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 20 20"><rect x="2" y="3" width="4" height="14" rx="1" fill="#14181F"/><rect x="8" y="3" width="4" height="10" rx="1" fill="#4B5563"/><rect x="14" y="3" width="4" height="6" rx="1" fill="#DCDDD6"/></svg></div><h4>Dashboard “Mi negocio hoy”</h4><p>La foto del día: ventas del mes en unidades y $, prospectos calientes, demos, tamaño de red, activos vs. inactivos y progreso a la meta. Arriba, las alertas de IA.</p></div>
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 20 20"><rect x="2" y="4" width="5" height="12" rx="1.5" fill="none" stroke="#14181F" stroke-width="1.6"/><rect x="13" y="4" width="5" height="8" rx="1.5" fill="none" stroke="#14181F" stroke-width="1.6"/></svg></div><h4>Pipeline doble vía</h4><p>Kanban arrastrable. Cada contacto es cliente, posible distribuidor o ambos, y avanza por su vía (venta o auspicio). Origen, temperatura, notas e historial completo.</p></div>
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="7" r="3.2" fill="none" stroke="#14181F" stroke-width="1.8"/><path d="M4 17c0-3.3 2.7-5 6-5s6 1.7 6 5" fill="none" stroke="#14181F" stroke-width="1.8" stroke-linecap="round"/></svg></div><h4>Clientes y recompra</h4><p>Ficha con productos, fecha y monto. Calcula el cambio de cada purificador y dispara el recordatorio solo. Facturación mensual y quién refirió a quién.</p></div>
+      <div class="feat cy"><div class="ic"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M10 2c-3 4-5 6-5 9a5 5 0 0010 0c0-3-2-5-5-9z" fill="none" stroke="#14181F" stroke-width="1.8"/></svg></div><h4>Catálogo + simulador de ahorro</h4><p>Productos de agua, aire, Iontrix3 y portátiles, con un simulador de ahorro frente al agua envasada para cerrar la venta con números.</p></div>
     </div>
   </div>
-</section>
 
-<section class="sec" style="padding-top:0">
-  <div class="wrap">
-    <div class="eco reveal">
-      <div>
-        <span class="eyebrow" style="color:var(--magenta2)">Parte de algo más grande</span>
-        <h2>El NPS es el síntoma. Delenio trata la causa.</h2>
-        <p>PromotIA detecta dónde se te caen los clientes. Y cuando hace falta resolverlo de fondo, se apoya en las cinco unidades de Delenio para pasar del diagnóstico a la acción.</p>
-      </div>
-      <div class="units">
-        <span class="unit"><i style="background:#7FA8FF"></i>Reingeniería Comercial</span>
-        <span class="unit"><i style="background:#69E0AE"></i>Growth</span>
-        <span class="unit"><i style="background:#F46BC2"></i>Innovación</span>
-        <span class="unit"><i style="background:#F4C66B"></i>Marketing</span>
-        <span class="unit"><i style="background:#D9A9DF"></i>People</span>
-      </div>
+  <!-- Pilar 3 -->
+  <div class="pillar">
+    <div class="pillar-top"><span class="num">03</span><h3>Recomprá y reactivá</h3><p>Donde el distribuidor deja plata: clientes fríos y promos que vencen.</p></div>
+    <div class="feat-grid">
+      <div class="feat am"><div class="ic"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M3 7l7-4 7 4-7 4z" fill="none" stroke="#B9740A" stroke-width="1.6" stroke-linejoin="round"/><path d="M3 7v6l7 4 7-4V7" fill="none" stroke="#B9740A" stroke-width="1.6" stroke-linejoin="round"/></svg></div><h4>Promociones bancarias con vigencia</h4><p>Cargá las promos del período —banco, beneficio (cuotas, descuento, reintegro), productos y fechas—. La base para vender con el argumento de financiación justo.</p></div>
+      <div class="feat am"><div class="ic"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M10 2 4 12h5l-1 6 7-10h-5z" fill="#B9740A"/></svg></div><h4>Motor de reactivación bancaria (IA)</h4><p>Cruza las promos vigentes con tus clientes de producto vencido sin renovar y te arma la lista de a quién contactar ahora y con qué oferta de su banco.</p></div>
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 22 22"><circle cx="11" cy="11" r="7.5" fill="none" stroke="#14181F" stroke-width="2"/><path d="M11 7v4l3 2" stroke="#14181F" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div><h4>Alertas de retención</h4><p>Filtros por vencer, clientes fríos y oportunidades de upsell aparecen primero en tu día, antes de que la venta se enfríe.</p></div>
     </div>
   </div>
-</section>
 
-<section class="sec" id="precios" style="background:var(--surface)">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow">Precios</span>
-      <h2>Planes simples, que crecen con vos.</h2>
-      <p>Empezá midiendo una empresa y escalá cuando lo necesites. Sin costos de implementación.</p>
-    </div>
-    <div class="price-grid">
-      <div class="plan reveal">
-        <div class="pname">Start</div>
-        <div class="pdesc">Para empezar a medir tu NPS B2B en serio.</div>
-        <div class="pprice"><span class="amt">US$49</span> <span class="per">/ mes</span></div>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg>1 empresa</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg>NPS mensual + dashboard completo</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg>Carga por Excel y manual</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg>Histórico y segmentación</li>
-        </ul>
-        <a class="btn btn-ghost" href="#demo">Empezar</a>
-      </div>
-      <div class="plan feat-plan reveal">
-        <span class="ribbon">Más elegido</span>
-        <div class="pname">Growth</div>
-        <div class="pdesc">Medición + inteligencia para actuar.</div>
-        <div class="pprice"><span class="amt">US$99</span> <span class="per">/ mes</span></div>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg>Todo lo de Start</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg>Voz del cliente con IA</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg>Plan de acción con IA</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg>Contexto de productos y servicios</li>
-        </ul>
-        <a class="btn btn-primary" href="#demo">Pedir una demo</a>
-      </div>
-      <div class="plan reveal">
-        <div class="pname">Scale</div>
-        <div class="pdesc">Para consultoras y grupos multi-empresa.</div>
-        <div class="pprice"><span class="amt">A medida</span></div>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg>Todo lo de Growth</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg>Múltiples clientes y portales</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg>Cross-sell con IA del portfolio</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg>Soporte dedicado</li>
-        </ul>
-        <a class="btn btn-ghost" href="#demo">Hablemos</a>
-      </div>
-    </div>
-    <p class="price-note">Precios orientativos en dólares, sin impuestos. Facturación mensual, cancelás cuando quieras.</p>
-  </div>
-</section>
-
-<section class="sec" id="faq">
-  <div class="wrap">
-    <div class="sec-head reveal" style="margin:0 auto;text-align:center">
-      <span class="eyebrow">Preguntas frecuentes</span>
-      <h2>Lo que casi siempre nos preguntan.</h2>
-    </div>
-    <div class="faq">
-      <details class="qa reveal"><summary>¿Qué metodología usan para el NPS?<svg class="pm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></summary><div class="ans">La estándar: una sola pregunta de 0 a 10 más un comentario abierto. Clasificamos detractores (0-6), pasivos (7-8) y promotores (9-10), y el NPS es el porcentaje de promotores menos el de detractores. Nada de preguntas de más.</div></details>
-      <details class="qa reveal"><summary>¿Cómo cargo las respuestas?<svg class="pm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></summary><div class="ans">Descargás una plantilla de Excel, sumás una fila por cliente con su puntaje y comentario, y la subís. También podés cargar respuestas a mano. Las columnas se reconocen automáticamente.</div></details>
-      <details class="qa reveal"><summary>¿Qué hace exactamente la IA?<svg class="pm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></summary><div class="ans">Dos cosas: lee todos los comentarios y los agrupa en impulsores y dolores con ejemplos reales, y arma un plan de acción concreto para subir el score. Usa el contexto de tus productos y servicios para que las recomendaciones sean de tu negocio, no genéricas.</div></details>
-      <details class="qa reveal"><summary>¿Mis datos están seguros?<svg class="pm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></summary><div class="ans">Tus datos son tuyos y no se comparten con terceros ni con otros clientes. Cada empresa accede solo a su propio portal.</div></details>
-      <details class="qa reveal"><summary>¿Sirve si ya estoy midiendo NPS?<svg class="pm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></summary><div class="ans">Sí. Si ya recolectás puntajes, PromotIA les saca jugo: ordena la voz del cliente, te muestra la tendencia y convierte todo eso en un plan accionable mes a mes.</div></details>
+  <!-- Pilar 4 -->
+  <div class="pillar">
+    <div class="pillar-top"><span class="num">04</span><h3>Liderá tu organización</h3><p>Las herramientas que convierten a un buen vendedor en un líder de red.</p></div>
+    <div class="feat-grid">
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 22 22"><circle cx="11" cy="5" r="2.6" fill="#14181F"/><circle cx="5" cy="16" r="2.6" fill="none" stroke="#14181F" stroke-width="1.8"/><circle cx="17" cy="16" r="2.6" fill="none" stroke="#14181F" stroke-width="1.8"/><path d="M11 7.6 6 13.5M11 7.6l5 5.9" stroke="#DCDDD6" stroke-width="1.6"/></svg></div><h4>Mi Red multinivel</h4><p>Árbol de tu organización por niveles. Rango, actividad y volumen de cada miembro, con volumen personal vs. grupal y los inactivos resaltados.</p></div>
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M3 14l4-5 3 3 5-7" fill="none" stroke="#14181F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="15" cy="5" r="1.6" fill="#14181F"/></svg></div><h4>IA avanzada de red</h4><p>Predicción de abandono, recomendación de a quién promover, simulador de crecimiento y el “patrón de éxito” que copia lo que hacen tus top performers.</p></div>
+      <div class="feat cy"><div class="ic"><svg width="20" height="20" viewBox="0 0 20 20"><rect x="3" y="3" width="14" height="14" rx="3" fill="none" stroke="#14181F" stroke-width="1.8"/><path d="M7 10l2 2 4-4" stroke="#14181F" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h4>Multiusuario + permisos (RBAC)</h4><p>Cada distribuidor con su cuenta. El upline ve la actividad agregada de su organización, con roles de líder y distribuidor.</p></div>
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M6 3h8v4a4 4 0 01-8 0z" fill="none" stroke="#14181F" stroke-width="1.6"/><path d="M10 11v4M7 17h6" stroke="#14181F" stroke-width="1.8" stroke-linecap="round"/></svg></div><h4>Gamificación y reconocimiento</h4><p>Rangos, insignias, ranking de equipo y desafíos. La cultura de reconocimiento que mueve al multinivel, dentro de la app.</p></div>
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M10 3v9M6 9l4 4 4-4" stroke="#14181F" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 16h12" stroke="#14181F" stroke-width="1.8" stroke-linecap="round"/></svg></div><h4>Reportes y exportación</h4><p>Desempeño propio y de red exportable, con enganche al back de PSA para mantener todo sincronizado.</p></div>
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="7" cy="7" r="3" fill="none" stroke="#14181F" stroke-width="1.8"/><path d="M11 11l5 5" stroke="#14181F" stroke-width="1.8" stroke-linecap="round"/><path d="M14 4h3v3" stroke="#14181F" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></div><h4>Captación de leads</h4><p>Tu propio link de referido y landing. Lo que entra por redes cae directo a tu pipeline, sin cargar nada a mano.</p></div>
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M10 3a7 7 0 100 14 7 7 0 000-14z" fill="none" stroke="#14181F" stroke-width="1.6"/><path d="M10 6v4l3 1" stroke="#14181F" stroke-width="1.8" stroke-linecap="round"/></svg></div><h4>Onboarding del distribuidor</h4><p>Ruta guiada para que el recién incorporado arranque a usar el CRM —y a producir— desde el día uno. Duplicás tu sistema sin desgastarte.</p></div>
     </div>
   </div>
-</section>
+</div></section>
 
-<section class="ctaband" id="demo">
-  <div class="ctaband-in reveal">
-    <h2>¿Listo para saber qué dirían tus clientes?</h2>
-    <p>Pedinos una demo y te mostramos PromotIA con datos de ejemplo en 20 minutos. Sin compromiso.</p>
-    <div class="cta-row">
-      <a class="btn btn-light" href="mailto:talento@delenio.net?subject=Quiero%20una%20demo%20de%20PromotIA&body=Hola%20Delenio%2C%20me%20gustar%C3%ADa%20ver%20una%20demo%20de%20PromotIA%20para%20medir%20el%20NPS%20de%20mis%20clientes%20B2B.">Pedir una demo</a>
-      <a class="btn btn-ghost" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.45)" href="#producto">Ver el producto</a>
+<!-- SPOTLIGHT IA / BANCOS -->
+<section class="block" id="ia"><div class="wrap">
+  <div class="spotlight">
+    <div>
+      <span class="eyebrow">Diferencial · pensado para Argentina</span>
+      <h2>La promo del banco, convertida en venta.</h2>
+      <p>En Argentina la financiación define la compra. NexIA cruza dos datos que solían quedar muertos —un cliente que se enfrió y una promo que vence— y los transforma en una recompra con timing perfecto.</p>
+      <p style="color:#B6FF00;font-weight:600;font-size:15px">“María (filtro vencido hace 2 meses) opera con Galicia, que esta semana tiene 12 cuotas sin interés. Momento ideal para la renovación.”</p>
+    </div>
+    <div class="spot-flow">
+      <div class="spot-step"><span class="n">1</span><div><b>Cargás las promos del período</b><span>Banco, beneficio, productos y vigencia desde/hasta.</span></div></div>
+      <div class="spot-step"><span class="n">2</span><div><b>NexIA conoce el banco de cada cliente</b><span>Guardado en su ficha, junto al estado de su producto.</span></div></div>
+      <div class="spot-step"><span class="n">3</span><div><b>La IA hace el match</b><span>Producto vencido + banco con promo activa = oportunidad priorizada.</span></div></div>
+      <div class="spot-step"><span class="n">4</span><div><b>Contactás con el argumento justo</b><span>Mensaje de WhatsApp ya redactado con la promo de su banco.</span></div></div>
     </div>
   </div>
-</section>
+</div></section>
 
-</main>
-
-<footer class="foot">
-  <div class="wrap">
-    <div class="foot-in">
-      <div>
-        <a class="brand" href="#top" aria-label="PromotIA">
-          <svg width="38" height="38" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-            <rect x="1.5" y="1.5" width="45" height="45" rx="13" fill="url(#pg)"/>
-            <path d="M14 16h20a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H22l-6 5v-5h-2a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3Z" fill="#fff" opacity=".94"/>
-            <path d="M24 28.5l-4.2-4c-1.2-1.15-1.1-3 .2-3.9 1.05-.72 2.45-.45 3.25.5l.75.9.75-.9c.8-.95 2.2-1.22 3.25-.5 1.3.9 1.4 2.75.2 3.9L24 28.5Z" fill="#E40993"/>
-          </svg>
-          <span class="wm">Promot<b>IA</b><small>NPS B2B · by Delenio</small></span>
-        </a>
-        <p>Medí el NPS de tus clientes B2B mes a mes, entendé su voz y actuá sobre el score. Un producto de Delenio.</p>
-      </div>
-      <div>
-        <h5>Producto</h5>
-        <a href="#producto">Funcionalidades</a>
-        <a href="#como">Cómo funciona</a>
-        <a href="#precios">Precios</a>
-        <a href="#faq">Preguntas frecuentes</a>
-      </div>
-      <div>
-        <h5>Delenio</h5>
-        <a href="https://www.delenio.net" target="_blank" rel="noopener">delenio.net</a>
-        <a href="mailto:talento@delenio.net">talento@delenio.net</a>
-        <a href="#demo">Pedir una demo</a>
-      </div>
-    </div>
-    <div class="foot-bottom">
-      <span>© 2026 Delenio · PromotIA. Todos los derechos reservados.</span>
-      <span>Sincronizamos Estrategia Comercial, Leads, Marketing, Talento y Tecnología.</span>
-    </div>
+<!-- COMO -->
+<section class="block" id="como"><div class="wrap">
+  <div class="section-head">
+    <span class="eyebrow">Cómo funciona</span>
+    <h2>De la mañana a la venta, en tres pasos</h2>
   </div>
-</footer>
+  <div class="steps">
+    <div class="step"><div class="n">1</div><h4>Abrí tu día</h4><p>Entrás a “Tu día” y la IA ya priorizó a quién contactar y por qué, cruzando tus prospectos, clientes y red.</p></div>
+    <div class="step"><div class="n">2</div><h4>Actuá con un toque</h4><p>Cada acción abre el mensaje de WhatsApp listo o la ficha. Confirmás demos, recordás recompras, acompañás a tu equipo.</p></div>
+    <div class="step"><div class="n">3</div><h4>Mirá crecer tu red</h4><p>Tus números y tu organización se actualizan solos. La IA te avisa quién afloja y a quién promover.</p></div>
+  </div>
+</div></section>
 
-<script>
-(function(){
-  var s=document.getElementById('scale'); if(!s) return;
-  for(var n=0;n<=10;n++){
-    var d=document.createElement('div'); d.className='n'; d.textContent=n;
-    d.style.background = n<=6 ? 'rgba(229,86,75,.92)' : n<=8 ? 'rgba(201,186,207,.55)' : 'rgba(30,158,106,.92)';
-    s.appendChild(d);
-  }
-})();
-(function(){
-  var els=[].slice.call(document.querySelectorAll('.reveal'));
-  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
-  var io=new IntersectionObserver(function(entries){
-    entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
-  },{threshold:.14});
-  els.forEach(function(e){io.observe(e)});
-})();
-(function(){
-  var score=52, full=289, frac=(score+100)/200;
-  var arc=document.getElementById('gArc'), needle=document.getElementById('gNeedle'), label=document.getElementById('gScore');
-  function run(){
-    if(arc) arc.style.strokeDashoffset=(full*(1-frac)).toFixed(1);
-    if(needle) needle.setAttribute('transform','rotate('+(-90+frac*180).toFixed(1)+' 120 116)');
-    if(label){ var cur=0; var t=setInterval(function(){ cur+=2; if(cur>=score){cur=score;clearInterval(t);} label.textContent='+'+cur; },28); }
-  }
-  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-    if(arc){arc.style.transition='none';arc.style.strokeDashoffset=(full*(1-frac)).toFixed(1);}
-    if(needle){needle.setAttribute('transform','rotate('+(-90+frac*180).toFixed(1)+' 120 116)');}
-    if(label){label.textContent='+'+score;} return;
-  }
-  setTimeout(run,420);
-})();
-</script>
+<!-- PRECIOS -->
+<section class="block" id="precios"><div class="wrap">
+  <div class="section-head" style="margin:0 auto 44px;text-align:center">
+    <span class="eyebrow">Precios</span>
+    <h2>Elegí tu plan</h2>
+    <p style="margin:0 auto">Precios por usuario, por mes.</p>
+  </div>
+  <div class="pricing"><div class="price-grid">
+    <div class="plan">
+      <div class="tier">Distribuidor</div>
+      <div class="price"><b>USD 20</b><span>/usuario · mes</span></div>
+      <div class="desc">Para el distribuidor que quiere vender más y no perder ningún seguimiento.</div>
+      <a class="btn ghost" href="https://wa.me/5491140566256?text=Hola%21%20Quiero%20informaci%C3%B3n%20del%20plan%20Distribuidor%20de%20NexIA." target="_blank" rel="noreferrer" style="width:100%;justify-content:center;margin-top:8px">Contactate con nosotros</a>
+    </div>
+
+    <div class="plan pro">
+      <span class="badge-rec">Recomendado</span>
+      <div class="tier">Líderes</div>
+      <div class="price"><b>USD 50</b><span>/usuario · mes</span></div>
+      <div class="desc">Para quien construye y conduce una red. Todo lo del plan Distribuidor, más las herramientas de liderazgo.</div>
+      <a class="btn primary neon" href="https://wa.me/5491140566256?text=Hola%21%20Quiero%20informaci%C3%B3n%20del%20plan%20L%C3%ADderes%20de%20NexIA." target="_blank" rel="noreferrer" style="width:100%;justify-content:center;margin-top:8px">Contactate con nosotros</a>
+    </div>
+  </div></div>
+</div></section>
+
+<!-- FINAL -->
+<section class="final"><div class="wrap">
+  <span class="eyebrow">Empezá hoy</span>
+  <h2>Tu próxima venta ya está en tu lista.</h2>
+  <p>Dejá que la IA te diga por dónde empezar cada mañana.</p>
+  <a class="btn primary neon" href="https://app.nexia.talenio.tech/">Ingresar</a>
+</div></section>
+
+<footer><div class="wrap"><div class="foot">
+  <div class="logo">
+    <span class="mark"><svg width="22" height="22" viewBox="0 0 64 64"><g stroke="#fff" stroke-width="1.7" opacity=".55" stroke-linecap="round"><line x1="32" y1="29" x2="12" y2="12"/><line x1="32" y1="29" x2="8" y2="34"/><line x1="32" y1="29" x2="22" y2="52"/><line x1="32" y1="29" x2="52" y2="42"/><line x1="12" y1="12" x2="44" y2="10"/><line x1="52" y1="42" x2="54" y2="20"/><line x1="22" y1="52" x2="52" y2="42"/></g><circle cx="12" cy="12" r="4.5" fill="#fff"/><circle cx="44" cy="10" r="3" fill="#fff"/><circle cx="8" cy="34" r="3" fill="#fff"/><circle cx="22" cy="52" r="3.5" fill="#fff"/><circle cx="54" cy="20" r="2.4" fill="#fff"/><circle cx="52" cy="42" r="4.2" fill="#B6FF00"/><rect x="24" y="22" width="16" height="13" rx="5" fill="#14181F" stroke="#fff" stroke-width="3"/><path d="M29 35 L29 41 L35 35 Z" fill="#fff"/><circle cx="32" cy="28" r="1.7" fill="#B6FF00"/></svg></span>
+    NexIA
+  </div>
+  <small>El CRM con IA para distribuidores de venta directa y multinivel.</small>
+  <small>© 2026 · Hecho con NexIA</small>
+</div></div></footer>
+
 </body>
 </html>
