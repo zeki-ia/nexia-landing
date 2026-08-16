@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexIA — El CRM con IA para distribuidores</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2048%2048%27%3E%3Crect%20width%3D%2748%27%20height%3D%2748%27%20rx%3D%2712%27%20fill%3D%27%2314181F%27%2F%3E%3Cg%20transform%3D%27translate%284%2C4%29%20scale%280.625%29%27%3E%3Cg%20stroke%3D%27%23fff%27%20stroke-width%3D%272.4%27%20opacity%3D%270.6%27%20stroke-linecap%3D%27round%27%3E%3Cline%20x1%3D%2732%27%20y1%3D%2730%27%20x2%3D%2714%27%20y2%3D%2716%27%2F%3E%3Cline%20x1%3D%2732%27%20y1%3D%2730%27%20x2%3D%2724%27%20y2%3D%2750%27%2F%3E%3Cline%20x1%3D%2732%27%20y1%3D%2730%27%20x2%3D%2750%27%20y2%3D%2740%27%2F%3E%3Cline%20x1%3D%2714%27%20y1%3D%2716%27%20x2%3D%2750%27%20y2%3D%2740%27%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2714%27%20cy%3D%2716%27%20r%3D%275%27%20fill%3D%27%23fff%27%2F%3E%3Ccircle%20cx%3D%2724%27%20cy%3D%2750%27%20r%3D%274%27%20fill%3D%27%23fff%27%2F%3E%3Ccircle%20cx%3D%2750%27%20cy%3D%2740%27%20r%3D%275.4%27%20fill%3D%27%23B6FF00%27%2F%3E%3Crect%20x%3D%2725%27%20y%3D%2723%27%20width%3D%2714%27%20height%3D%2712%27%20rx%3D%274.5%27%20fill%3D%27%2314181F%27%20stroke%3D%27%23fff%27%20stroke-width%3D%273%27%2F%3E%3Cpath%20d%3D%27M30%2035L30%2041L35%2035Z%27%20fill%3D%27%23fff%27%2F%3E%3Ccircle%20cx%3D%2732%27%20cy%3D%2729%27%20r%3D%271.6%27%20fill%3D%27%23B6FF00%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --violet:#14181F; --violet-d:#0E1117; --violet-soft:#F0F1EE;
+  --cyan:#B6FF00; --cyan-soft:#EFFFC9;
+  --ink:#14181F; --muted:#6B7280; --bg:#F5F6F3; --surface:#FFFFFF;
+  --line:#E7E8E2; --amber:#FF9F1C;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',system-ui,sans-serif;color:var(--ink);background:var(--bg);
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:'Sora',sans-serif;letter-spacing:-.02em;line-height:1.12;font-weight:700}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.eyebrow{font-weight:700;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--violet)}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:'Manrope';font-weight:700;font-size:15px;
+  padding:13px 22px;border-radius:12px;border:1.5px solid transparent;cursor:pointer;transition:.18s;white-space:nowrap}
+.btn.primary{background:var(--violet);color:#fff;box-shadow:0 12px 26px -12px rgba(79,70,229,.7)}
+.btn.primary:hover{background:var(--violet-d);transform:translateY(-1px)}
+.btn.ghost{background:#fff;border-color:var(--line);color:var(--ink)}
+.btn.ghost:hover{border-color:var(--violet);color:var(--violet)}
+
+/* nav */
+header{position:sticky;top:0;z-index:40;background:rgba(244,243,251,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Sora';font-weight:800;font-size:21px;letter-spacing:-.04em}
+.logo .mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#2B313C,var(--violet));
+  display:grid;place-items:center;flex-shrink:0}
+.nav-links{display:flex;gap:30px;font-weight:600;font-size:15px;color:var(--muted)}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{display:flex;gap:12px;align-items:center}
+@media(max-width:860px){.nav-links{display:none}.nav-cta .btn.ghost{display:none}}
+
+/* hero */
+.hero{padding:84px 0 70px;position:relative;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.hero h1{font-size:54px;font-weight:800;margin:18px 0 20px}
+.hero h1 .grad{color:var(--ink);box-shadow:inset 0 -.26em 0 var(--cyan);border-radius:2px}
+.hero p.lead{font-size:19px;color:var(--muted);max-width:540px;margin-bottom:30px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.hero-note{font-size:13.5px;color:var(--muted);margin-top:16px}
+.hero-note b{color:var(--ink)}
+@media(max-width:880px){.hero-grid{grid-template-columns:1fr;gap:36px}.hero h1{font-size:40px}}
+
+/* hero visual */
+.visual{position:relative;height:440px}
+.orbit-stage{position:absolute;inset:0;display:grid;place-items:center}
+.orbit{position:absolute;border-radius:50%;border:1.5px solid var(--line)}
+.o1{width:420px;height:420px;animation:spin 36s linear infinite}
+.o2{width:280px;height:280px;border-color:#EFFFC9;animation:spin 24s linear infinite reverse}
+.node{position:absolute;width:14px;height:14px;border-radius:50%;background:#fff;border:2.5px solid var(--violet);top:-7px;left:50%;margin-left:-7px}
+.node.c{border-color:var(--cyan)}
+.node.a{border-color:var(--amber);border-style:dashed}
+.core{width:78px;height:78px;border-radius:50%;background:linear-gradient(135deg,#2B313C,var(--violet));
+  display:grid;place-items:center;color:#fff;font-family:'Sora';font-weight:700;font-size:15px;
+  box-shadow:0 16px 40px -12px rgba(79,70,229,.6);z-index:2}
+.float-card{position:absolute;background:#fff;border:1px solid var(--line);border-radius:16px;
+  box-shadow:0 24px 50px -20px rgba(20,21,43,.28);padding:14px 16px;z-index:3}
+.fc-today{top:14px;right:-6px;width:268px}
+.fc-today .h{display:flex;align-items:center;gap:7px;font-family:'Sora';font-weight:700;font-size:14px;margin-bottom:10px}
+.fc-row{display:flex;align-items:center;gap:9px;padding:8px;border-radius:10px;background:var(--bg);margin-bottom:7px}
+.chip{font-size:9.5px;font-weight:700;padding:3px 7px;border-radius:6px;text-transform:uppercase;letter-spacing:.03em}
+.chip.v{background:var(--violet-soft);color:var(--violet)}
+.chip.c{background:#E4F7EE;color:#18B26A}
+.chip.a{background:#FFF3E2;color:#B9740A}
+.fc-row span{font-size:12px;font-weight:600}
+.fc-kpi{bottom:18px;left:-8px;width:210px;display:flex;gap:14px}
+.fc-kpi .k b{font-family:'Sora';font-size:22px;display:block;line-height:1.1}
+.fc-kpi .k small{font-size:11px;color:var(--muted)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.net-stage{position:absolute;inset:0;width:100%;height:100%}
+.net-stage .pulse{animation:nodepulse 3.2s ease-in-out infinite;transform-origin:center;transform-box:fill-box}
+@keyframes nodepulse{0%,100%{opacity:1}50%{opacity:.5}}
+@media(max-width:880px){.visual{height:360px}.o1{width:330px;height:330px}.o2{width:220px;height:220px}.fc-today{right:0;width:240px}}
+@media(prefers-reduced-motion:reduce){.o1,.o2{animation:none}.net-stage .pulse{animation:none}}
+
+/* value strip */
+.values{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:8px 0 76px}
+.vcard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px}
+.vcard .ic{width:42px;height:42px;border-radius:11px;background:var(--violet-soft);display:grid;place-items:center;margin-bottom:14px}
+.vcard h3{font-size:18px;margin-bottom:7px}
+.vcard p{font-size:14.5px;color:var(--muted)}
+@media(max-width:860px){.values{grid-template-columns:1fr}}
+
+/* sections */
+section.block{padding:80px 0}
+.section-head{max-width:680px;margin-bottom:44px}
+.section-head h2{font-size:38px;margin:14px 0 12px}
+.section-head p{font-size:18px;color:var(--muted)}
+
+/* pillars */
+.pillar{margin-bottom:56px}
+.pillar-top{display:flex;align-items:baseline;gap:14px;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.pillar-top .num{font-family:'Sora';font-weight:800;font-size:15px;color:var(--violet)}
+.pillar-top h3{font-size:24px}
+.pillar-top p{color:var(--muted);font-size:15px;margin-left:auto;max-width:380px;text-align:right}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.feat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;transition:.18s}
+.feat:hover{border-color:#DCDDD6;box-shadow:0 16px 34px -22px rgba(79,70,229,.45);transform:translateY(-2px)}
+.feat .ic{width:40px;height:40px;border-radius:11px;background:var(--violet-soft);display:grid;place-items:center;margin-bottom:14px}
+.feat.cy .ic{background:var(--cyan-soft)}
+.feat.am .ic{background:#FFF3E2}
+.feat h4{font-size:16.5px;margin-bottom:7px}
+.feat p{font-size:14px;color:var(--muted)}
+@media(max-width:920px){.feat-grid{grid-template-columns:1fr 1fr}.pillar-top p{display:none}}
+@media(max-width:600px){.feat-grid{grid-template-columns:1fr}}
+
+/* spotlight bank engine */
+.spotlight{background:linear-gradient(135deg,#14181F,#1F242E);border-radius:28px;color:#fff;
+  padding:54px;display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center;overflow:hidden;position:relative}
+.spotlight .eyebrow{color:#B6FF00}
+.spotlight h2{font-size:34px;color:#fff;margin:14px 0 16px}
+.spotlight p{color:#C9CDD4;font-size:16.5px;margin-bottom:14px}
+.spot-flow{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:22px}
+.spot-step{display:flex;gap:13px;align-items:flex-start;padding:11px 0}
+.spot-step:not(:last-child){border-bottom:1px solid rgba(255,255,255,.1)}
+.spot-step .n{width:26px;height:26px;border-radius:8px;background:rgba(143,240,200,.16);color:#B6FF00;
+  font-family:'Sora';font-weight:700;font-size:13px;display:grid;place-items:center;flex-shrink:0}
+.spot-step b{display:block;font-size:14.5px;color:#fff;margin-bottom:2px}
+.spot-step span{font-size:13px;color:#B9BDC4}
+@media(max-width:880px){.spotlight{grid-template-columns:1fr;padding:36px}}
+
+/* how */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.step{position:relative;padding-top:8px}
+.step .n{font-family:'Sora';font-weight:800;font-size:40px;color:var(--violet);opacity:.25;line-height:1}
+.step h4{font-size:19px;margin:8px 0 8px}
+.step p{color:var(--muted);font-size:15px}
+@media(max-width:780px){.steps{grid-template-columns:1fr}}
+
+/* pricing */
+.pricing{background:#fff;border-radius:28px;border:1px solid var(--line);padding:14px}
+.price-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.plan{padding:38px}
+.plan:first-child{border-right:1px solid var(--line)}
+.plan .tier{font-family:'Sora';font-weight:700;font-size:14px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.plan.pro .tier{color:var(--violet)}
+.plan .price{display:flex;align-items:flex-end;gap:6px;margin:14px 0 4px}
+.plan .price b{font-family:'Sora';font-weight:800;font-size:48px;letter-spacing:-2px}
+.plan .price span{color:var(--muted);font-weight:600;font-size:15px;padding-bottom:9px}
+.plan .desc{color:var(--muted);font-size:14.5px;margin-bottom:22px;min-height:42px}
+.plan ul{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:26px}
+.plan li{display:flex;gap:10px;font-size:14.5px;align-items:flex-start}
+.plan li svg{flex-shrink:0;margin-top:3px}
+.plan.pro{position:relative;background:linear-gradient(180deg,#FAFBF8,#fff);border-radius:20px}
+.badge-rec{position:absolute;top:-13px;right:28px;background:var(--violet);color:#fff;font-size:11.5px;
+  font-weight:700;padding:5px 13px;border-radius:20px;letter-spacing:.02em}
+.plan .inc{font-size:13px;font-weight:700;color:var(--violet);margin-bottom:11px}
+@media(max-width:780px){.price-grid{grid-template-columns:1fr}.plan:first-child{border-right:none;border-bottom:1px solid var(--line)}}
+.enterprise{text-align:center;margin-top:22px;color:var(--muted);font-size:15px}
+.enterprise a{color:var(--violet);font-weight:700}
+
+/* final cta */
+.final{text-align:center;padding:90px 0}
+.final h2{font-size:42px;margin-bottom:16px}
+.final p{font-size:19px;color:var(--muted);max-width:520px;margin:0 auto 30px}
+
+/* footer */
+footer{background:#fff;border-top:1px solid var(--line);padding:40px 0}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.foot small{color:var(--muted);font-size:13.5px}
+.foot .logo{font-size:18px}
+.btn.neon{background:var(--cyan);color:var(--ink);box-shadow:0 12px 26px -12px rgba(182,255,0,.55)}.btn.neon:hover{background:#9BDB00;transform:translateY(-1px)}.foot-legal{display:flex;gap:24px;flex-wrap:wrap;padding-bottom:20px;margin-bottom:20px;border-bottom:1px solid var(--line)}.foot-legal a{font-size:13.5px;font-weight:600;color:var(--muted)}.foot-legal a:hover{color:var(--ink)}
+.legal{padding:60px 0;border-top:1px solid var(--line)}
+.legal-head{margin-bottom:24px}
+.legal-head h2{font-size:30px;margin:10px 0 8px}
+.legal-titular{color:var(--muted);font-size:14px;max-width:760px}
+.legal details{background:var(--surface);border:1px solid var(--line);border-radius:14px;margin-bottom:12px;overflow:hidden}
+.legal summary{cursor:pointer;padding:18px 22px;font-family:'Sora',sans-serif;font-weight:700;font-size:16px;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.legal summary::-webkit-details-marker{display:none}
+.legal summary::after{content:"+";color:var(--muted);font-size:24px;font-weight:400;line-height:1}
+.legal details[open] summary::after{content:"\2013"}
+.legal details[open] summary{border-bottom:1px solid var(--line)}
+.legal-body{padding:10px 22px 22px;font-size:14.5px;color:#31353F;line-height:1.7}
+.legal-body h4{font-family:'Sora',sans-serif;font-size:15px;margin:16px 0 6px;color:var(--ink)}
+.legal-body p,.legal-body li{margin-bottom:8px}
+.legal-body ul{padding-left:20px}
+.legal-upd{color:var(--muted);font-size:12.5px;margin-bottom:10px}
+.legal-card{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin-top:14px;font-size:13.5px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap"><nav>
+    <div class="logo">
+      <span class="mark"><svg width="22" height="22" viewBox="0 0 64 64"><g stroke="#fff" stroke-width="1.7" opacity=".55" stroke-linecap="round"><line x1="32" y1="29" x2="12" y2="12"/><line x1="32" y1="29" x2="8" y2="34"/><line x1="32" y1="29" x2="22" y2="52"/><line x1="32" y1="29" x2="52" y2="42"/><line x1="12" y1="12" x2="44" y2="10"/><line x1="52" y1="42" x2="54" y2="20"/><line x1="22" y1="52" x2="52" y2="42"/></g><circle cx="12" cy="12" r="4.5" fill="#fff"/><circle cx="44" cy="10" r="3" fill="#fff"/><circle cx="8" cy="34" r="3" fill="#fff"/><circle cx="22" cy="52" r="3.5" fill="#fff"/><circle cx="54" cy="20" r="2.4" fill="#fff"/><circle cx="52" cy="42" r="4.2" fill="#B6FF00"/><rect x="24" y="22" width="16" height="13" rx="5" fill="#14181F" stroke="#fff" stroke-width="3"/><path d="M29 35 L29 41 L35 35 Z" fill="#fff"/><circle cx="32" cy="28" r="1.7" fill="#B6FF00"/></svg></span>
+      NexIA
+    </div>
+    <div class="nav-links">
+      <a href="#funciones">Funciones</a>
+      <a href="#ia">IA</a>
+      <a href="#como">Cómo funciona</a>
+      <a href="#precios">Precios</a>
+    </div>
+    <div class="nav-cta">
+      <a class="btn primary neon" href="https://app.nexia.talenio.tech/">Ingresar</a>
+    </div>
+  </nav></div>
+</header>
+
+<!-- HERO -->
+<section class="hero"><div class="wrap"><div class="hero-grid">
+  <div>
+    <span class="eyebrow">El CRM con IA para distribuidores</span>
+    <h1>Tu negocio de distribución, <span class="grad">en red.</span></h1>
+    <p class="lead">NexIA ordena tus prospectos, tu cartera de clientes y toda tu red multinivel. Y cada mañana la IA te dice a quién contactar, qué escribirle y a quién acompañar. Vos vendés; lo demás se simplifica.</p>
+    <div class="hero-cta">
+      <a class="btn primary neon" href="https://app.nexia.talenio.tech/">Ingresar</a>
+      <a class="btn ghost" href="#como">Ver cómo funciona</a>
+    </div>
+    <p class="hero-note">Pensado para el modelo de <b>venta directa y redes multinivel</b>.</p>
+  </div>
+  <div class="visual">
+    <svg class="net-stage" viewBox="0 0 420 420" aria-hidden="true">
+      <circle cx="210" cy="205" r="120" fill="#14181F" opacity="0.05"/>
+      <g stroke="#14181F" stroke-width="2" opacity="0.4" stroke-linecap="round">
+        <line x1="210" y1="205" x2="78" y2="92"/><line x1="210" y1="205" x2="300" y2="74"/>
+        <line x1="210" y1="205" x2="95" y2="206"/><line x1="210" y1="205" x2="338" y2="262"/>
+        <line x1="210" y1="205" x2="250" y2="356"/>
+        <line x1="78" y1="92" x2="150" y2="56"/><line x1="150" y1="56" x2="300" y2="74"/>
+        <line x1="300" y1="74" x2="360" y2="150"/><line x1="338" y1="262" x2="360" y2="150"/>
+        <line x1="95" y1="206" x2="122" y2="330"/><line x1="122" y1="330" x2="250" y2="356"/>
+        <line x1="338" y1="262" x2="300" y2="312"/><line x1="250" y1="356" x2="300" y2="312"/>
+      </g>
+      <circle cx="78" cy="92" r="13" fill="#14181F"/>
+      <circle cx="150" cy="56" r="9" fill="#14181F"/>
+      <circle cx="300" cy="74" r="12" fill="#B6FF00" class="pulse"/>
+      <circle cx="360" cy="150" r="9" fill="#14181F"/>
+      <circle cx="95" cy="206" r="11" fill="#14181F"/>
+      <circle cx="338" cy="262" r="13" fill="#B6FF00" class="pulse"/>
+      <circle cx="122" cy="330" r="10" fill="#14181F"/>
+      <circle cx="250" cy="356" r="12" fill="#14181F"/>
+      <circle cx="300" cy="312" r="9" fill="#14181F"/>
+      <circle cx="210" cy="205" r="27" fill="#14181F"/>
+      <circle cx="210" cy="205" r="9" fill="#fff"/>
+    </svg>
+    <div class="float-card fc-today">
+      <div class="h"><svg width="16" height="16" viewBox="0 0 20 20"><path d="M11 2 4 12h5l-1 6 7-10h-5z" fill="#FF9F1C"/></svg> Tu día · priorizado por IA</div>
+      <div class="fc-row"><span class="chip v">demo</span><span>Confirmar demo · Carla</span></div>
+      <div class="fc-row"><span class="chip a">filtro</span><span>Recompra · María (Galicia)</span></div>
+      <div class="fc-row"><span class="chip c">red</span><span>Acompañar · Valeria</span></div>
+    </div>
+    <div class="float-card fc-kpi">
+      <div class="k"><b>$1,2M</b><small>Ventas del mes</small></div>
+      <div class="k"><b>12</b><small>En tu red</small></div>
+    </div>
+  </div>
+</div></div></section>
+
+<!-- VALUES -->
+<div class="wrap"><div class="values">
+  <div class="vcard">
+    <div class="ic"><svg width="22" height="22" viewBox="0 0 20 20"><path d="M11 2 4 12h5l-1 6 7-10h-5z" fill="#14181F"/></svg></div>
+    <h3>Sabé qué hacer hoy</h3>
+    <p>El Coach IA arma tu lista de acciones del día con el porqué claro. Se acabó el “¿a quién le escribo?”.</p>
+  </div>
+  <div class="vcard">
+    <div class="ic"><svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="7.5" fill="none" stroke="#14181F" stroke-width="2"/><path d="M11 7v4l3 2" stroke="#14181F" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <h3>No se te escapa una recompra</h3>
+    <p>NexIA calcula el cambio de cada purificador y te avisa a tiempo. Retención e ingreso recurrente, en piloto.</p>
+  </div>
+  <div class="vcard">
+    <div class="ic"><svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="3" fill="#14181F"/><circle cx="4" cy="5" r="2.4" fill="none" stroke="#14181F" stroke-width="1.8"/><circle cx="18" cy="6" r="2.4" fill="none" stroke="#14181F" stroke-width="1.8"/><circle cx="16" cy="17" r="2.4" fill="none" stroke="#14181F" stroke-width="1.8"/><path d="M6 6 9 9M16 8l-4 2M14 15l-2-3" stroke="#DCDDD6" stroke-width="1.6"/></svg></div>
+    <h3>Hacé crecer (y cuidá) tu red</h3>
+    <p>La IA detecta quién está por aflojar y a quién conviene promover. Liderás con datos, no con intuición.</p>
+  </div>
+</div></div>
+
+<!-- FUNCIONES -->
+<section class="block" id="funciones"><div class="wrap">
+  <div class="section-head">
+    <span class="eyebrow">Todo tu negocio en un lugar</span>
+    <h2>15 herramientas, una sola app</h2>
+    <p>Desde el primer contacto hasta la recompra y el crecimiento de tu organización. Organizadas en cuatro pilares.</p>
+  </div>
+
+  <!-- Pilar 1 -->
+  <div class="pillar">
+    <div class="pillar-top"><span class="num">01</span><h3>Tu día, resuelto por IA</h3><p>La inteligencia que te saca de encima el trabajo de pensar y redactar.</p></div>
+    <div class="feat-grid">
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M11 2 4 12h5l-1 6 7-10h-5z" fill="#14181F"/></svg></div><h4>Coach IA — “Tu día”</h4><p>Lista priorizada cada mañana: prospectos calientes sin contactar, demos a confirmar, filtros por vencer y red a acompañar. Con el motivo a la vista, no caja negra.</p></div>
+      <div class="feat cy"><div class="ic"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M3 4h14v9H7l-4 3z" fill="none" stroke="#14181F" stroke-width="1.8" stroke-linejoin="round"/></svg></div><h4>Mensajes WhatsApp IA</h4><p>Seguimientos, invitación a demo, post-demo, recompra e invitación al negocio. Maneja objeciones (“es caro”, “lo pienso”) y arma el guion de demo. Tono ajustable, listo para enviar.</p></div>
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 20 20"><rect x="3" y="4" width="14" height="13" rx="2" fill="none" stroke="#14181F" stroke-width="1.8"/><path d="M3 8h14M7 2v3M13 2v3" stroke="#14181F" stroke-width="1.8" stroke-linecap="round"/></svg></div><h4>Agenda y tareas</h4><p>Recordatorios y tareas —seguimientos, demos, llamados— generados por el Coach IA o cargados a mano. Nada queda en la cabeza.</p></div>
+    </div>
+  </div>
+
+  <!-- Pilar 2 -->
+  <div class="pillar">
+    <div class="pillar-top"><span class="num">02</span><h3>Vendé y registrá todo</h3><p>El pipeline, la cartera de clientes y los números, sin planillas.</p></div>
+    <div class="feat-grid">
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 20 20"><rect x="2" y="3" width="4" height="14" rx="1" fill="#14181F"/><rect x="8" y="3" width="4" height="10" rx="1" fill="#4B5563"/><rect x="14" y="3" width="4" height="6" rx="1" fill="#DCDDD6"/></svg></div><h4>Dashboard “Mi negocio hoy”</h4><p>La foto del día: ventas del mes en unidades y $, prospectos calientes, demos, tamaño de red, activos vs. inactivos y progreso a la meta. Arriba, las alertas de IA.</p></div>
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 20 20"><rect x="2" y="4" width="5" height="12" rx="1.5" fill="none" stroke="#14181F" stroke-width="1.6"/><rect x="13" y="4" width="5" height="8" rx="1.5" fill="none" stroke="#14181F" stroke-width="1.6"/></svg></div><h4>Pipeline doble vía</h4><p>Kanban arrastrable. Cada contacto es cliente, posible distribuidor o ambos, y avanza por su vía (venta o auspicio). Origen, temperatura, notas e historial completo.</p></div>
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="7" r="3.2" fill="none" stroke="#14181F" stroke-width="1.8"/><path d="M4 17c0-3.3 2.7-5 6-5s6 1.7 6 5" fill="none" stroke="#14181F" stroke-width="1.8" stroke-linecap="round"/></svg></div><h4>Clientes y recompra</h4><p>Ficha con productos, fecha y monto. Calcula el cambio de cada purificador y dispara el recordatorio solo. Facturación mensual y quién refirió a quién.</p></div>
+      <div class="feat cy"><div class="ic"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M10 2c-3 4-5 6-5 9a5 5 0 0010 0c0-3-2-5-5-9z" fill="none" stroke="#14181F" stroke-width="1.8"/></svg></div><h4>Catálogo + simulador de ahorro</h4><p>Productos de agua, aire, Iontrix3 y portátiles, con un simulador de ahorro frente al agua envasada para cerrar la venta con números.</p></div>
+    </div>
+  </div>
+
+  <!-- Pilar 3 -->
+  <div class="pillar">
+    <div class="pillar-top"><span class="num">03</span><h3>Recomprá y reactivá</h3><p>Donde el distribuidor deja plata: clientes fríos y promos que vencen.</p></div>
+    <div class="feat-grid">
+      <div class="feat am"><div class="ic"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M3 7l7-4 7 4-7 4z" fill="none" stroke="#B9740A" stroke-width="1.6" stroke-linejoin="round"/><path d="M3 7v6l7 4 7-4V7" fill="none" stroke="#B9740A" stroke-width="1.6" stroke-linejoin="round"/></svg></div><h4>Promociones bancarias con vigencia</h4><p>Cargá las promos del período —banco, beneficio (cuotas, descuento, reintegro), productos y fechas—. La base para vender con el argumento de financiación justo.</p></div>
+      <div class="feat am"><div class="ic"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M10 2 4 12h5l-1 6 7-10h-5z" fill="#B9740A"/></svg></div><h4>Motor de reactivación bancaria (IA)</h4><p>Cruza las promos vigentes con tus clientes de producto vencido sin renovar y te arma la lista de a quién contactar ahora y con qué oferta de su banco.</p></div>
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 22 22"><circle cx="11" cy="11" r="7.5" fill="none" stroke="#14181F" stroke-width="2"/><path d="M11 7v4l3 2" stroke="#14181F" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div><h4>Alertas de retención</h4><p>Filtros por vencer, clientes fríos y oportunidades de upsell aparecen primero en tu día, antes de que la venta se enfríe.</p></div>
+    </div>
+  </div>
+
+  <!-- Pilar 4 -->
+  <div class="pillar">
+    <div class="pillar-top"><span class="num">04</span><h3>Liderá tu organización</h3><p>Las herramientas que convierten a un buen vendedor en un líder de red.</p></div>
+    <div class="feat-grid">
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 22 22"><circle cx="11" cy="5" r="2.6" fill="#14181F"/><circle cx="5" cy="16" r="2.6" fill="none" stroke="#14181F" stroke-width="1.8"/><circle cx="17" cy="16" r="2.6" fill="none" stroke="#14181F" stroke-width="1.8"/><path d="M11 7.6 6 13.5M11 7.6l5 5.9" stroke="#DCDDD6" stroke-width="1.6"/></svg></div><h4>Mi Red multinivel</h4><p>Árbol de tu organización por niveles. Rango, actividad y volumen de cada miembro, con volumen personal vs. grupal y los inactivos resaltados.</p></div>
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M3 14l4-5 3 3 5-7" fill="none" stroke="#14181F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="15" cy="5" r="1.6" fill="#14181F"/></svg></div><h4>IA avanzada de red</h4><p>Predicción de abandono, recomendación de a quién promover, simulador de crecimiento y el “patrón de éxito” que copia lo que hacen tus top performers.</p></div>
+      <div class="feat cy"><div class="ic"><svg width="20" height="20" viewBox="0 0 20 20"><rect x="3" y="3" width="14" height="14" rx="3" fill="none" stroke="#14181F" stroke-width="1.8"/><path d="M7 10l2 2 4-4" stroke="#14181F" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h4>Multiusuario + permisos (RBAC)</h4><p>Cada distribuidor con su cuenta. El upline ve la actividad agregada de su organización, con roles de líder y distribuidor.</p></div>
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M6 3h8v4a4 4 0 01-8 0z" fill="none" stroke="#14181F" stroke-width="1.6"/><path d="M10 11v4M7 17h6" stroke="#14181F" stroke-width="1.8" stroke-linecap="round"/></svg></div><h4>Gamificación y reconocimiento</h4><p>Rangos, insignias, ranking de equipo y desafíos. La cultura de reconocimiento que mueve al multinivel, dentro de la app.</p></div>
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M10 3v9M6 9l4 4 4-4" stroke="#14181F" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 16h12" stroke="#14181F" stroke-width="1.8" stroke-linecap="round"/></svg></div><h4>Reportes y exportación</h4><p>Desempeño propio y de red exportable, con enganche al back de PSA para mantener todo sincronizado.</p></div>
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="7" cy="7" r="3" fill="none" stroke="#14181F" stroke-width="1.8"/><path d="M11 11l5 5" stroke="#14181F" stroke-width="1.8" stroke-linecap="round"/><path d="M14 4h3v3" stroke="#14181F" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></div><h4>Captación de leads</h4><p>Tu propio link de referido y landing. Lo que entra por redes cae directo a tu pipeline, sin cargar nada a mano.</p></div>
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M10 3a7 7 0 100 14 7 7 0 000-14z" fill="none" stroke="#14181F" stroke-width="1.6"/><path d="M10 6v4l3 1" stroke="#14181F" stroke-width="1.8" stroke-linecap="round"/></svg></div><h4>Onboarding del distribuidor</h4><p>Ruta guiada para que el recién incorporado arranque a usar el CRM —y a producir— desde el día uno. Duplicás tu sistema sin desgastarte.</p></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- SPOTLIGHT IA / BANCOS -->
+<section class="block" id="ia"><div class="wrap">
+  <div class="spotlight">
+    <div>
+      <span class="eyebrow">Diferencial · pensado para Argentina</span>
+      <h2>La promo del banco, convertida en venta.</h2>
+      <p>En Argentina la financiación define la compra. NexIA cruza dos datos que solían quedar muertos —un cliente que se enfrió y una promo que vence— y los transforma en una recompra con timing perfecto.</p>
+      <p style="color:#B6FF00;font-weight:600;font-size:15px">“María (filtro vencido hace 2 meses) opera con Galicia, que esta semana tiene 12 cuotas sin interés. Momento ideal para la renovación.”</p>
+    </div>
+    <div class="spot-flow">
+      <div class="spot-step"><span class="n">1</span><div><b>Cargás las promos del período</b><span>Banco, beneficio, productos y vigencia desde/hasta.</span></div></div>
+      <div class="spot-step"><span class="n">2</span><div><b>NexIA conoce el banco de cada cliente</b><span>Guardado en su ficha, junto al estado de su producto.</span></div></div>
+      <div class="spot-step"><span class="n">3</span><div><b>La IA hace el match</b><span>Producto vencido + banco con promo activa = oportunidad priorizada.</span></div></div>
+      <div class="spot-step"><span class="n">4</span><div><b>Contactás con el argumento justo</b><span>Mensaje de WhatsApp ya redactado con la promo de su banco.</span></div></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- COMO -->
+<section class="block" id="como"><div class="wrap">
+  <div class="section-head">
+    <span class="eyebrow">Cómo funciona</span>
+    <h2>De la mañana a la venta, en tres pasos</h2>
+  </div>
+  <div class="steps">
+    <div class="step"><div class="n">1</div><h4>Abrí tu día</h4><p>Entrás a “Tu día” y la IA ya priorizó a quién contactar y por qué, cruzando tus prospectos, clientes y red.</p></div>
+    <div class="step"><div class="n">2</div><h4>Actuá con un toque</h4><p>Cada acción abre el mensaje de WhatsApp listo o la ficha. Confirmás demos, recordás recompras, acompañás a tu equipo.</p></div>
+    <div class="step"><div class="n">3</div><h4>Mirá crecer tu red</h4><p>Tus números y tu organización se actualizan solos. La IA te avisa quién afloja y a quién promover.</p></div>
+  </div>
+</div></section>
+
+<!-- PRECIOS -->
+<section class="block" id="precios"><div class="wrap">
+  <div class="section-head" style="margin:0 auto 44px;text-align:center">
+    <span class="eyebrow">Precios</span>
+    <h2>Elegí tu plan</h2>
+    <p style="margin:0 auto">Precios por usuario, por mes.</p>
+  </div>
+  <div class="pricing"><div class="price-grid">
+    <div class="plan">
+      <div class="tier">Distribuidor</div>
+      <div class="price"><b>USD 18</b><span>/usuario · mes</span></div>
+      <div class="desc">Para el distribuidor que quiere vender más y no perder ningún seguimiento.</div>
+      <a class="btn ghost" href="https://wa.me/5491140566256?text=Hola%21%20Quiero%20informaci%C3%B3n%20del%20plan%20Distribuidor%20de%20NexIA." target="_blank" rel="noreferrer" style="width:100%;justify-content:center;margin-top:8px">Contactate con nosotros</a>
+    </div>
+
+    <div class="plan pro">
+      <span class="badge-rec">Recomendado</span>
+      <div class="tier">Distribuidor + Patrocinio</div>
+      <div class="price"><b>USD 25</b><span>/usuario · mes</span></div>
+      <div class="desc">Para quien construye y conduce una red. Todo lo del plan Distribuidor, más las herramientas de liderazgo.</div>
+      <a class="btn primary neon" href="https://wa.me/5491140566256?text=Hola%21%20Quiero%20informaci%C3%B3n%20del%20plan%20Distribuidor%20%2B%20Patrocinio%20de%20NexIA." target="_blank" rel="noreferrer" style="width:100%;justify-content:center;margin-top:8px">Contactate con nosotros</a>
+    </div>
+  </div></div>
+</div></section>
+
+<!-- FINAL -->
+<section class="final"><div class="wrap">
+  <span class="eyebrow">Empezá hoy</span>
+  <h2>Tu próxima venta ya está en tu lista.</h2>
+  <p>Dejá que la IA te diga por dónde empezar cada mañana.</p>
+  <a class="btn primary neon" href="https://app.nexia.talenio.tech/">Ingresar</a>
+</div></section>
+
+<section class="legal" id="legal"><div class="wrap">
+  <div class="legal-head">
+    <span class="eyebrow">Legal</span>
+    <h2>Políticas</h2>
+    <p class="legal-titular">Titular: <b>Pablo Ezequiel Luberriaga</b> · CUIT 20-30347010-8 · Domicilio: Charlone 1448, Depto 408, CABA (C1427), Argentina. Contacto: <a href="https://wa.me/5491140566256" target="_blank" rel="noreferrer">WhatsApp +54 9 11 4056 6256</a>.</p>
+  </div>
+
+  <details id="condiciones">
+    <summary>Condiciones de servicio</summary>
+    <div class="legal-body">
+      <p class="legal-upd">Última actualización: 16 de agosto de 2026 · Titular: Pablo Ezequiel Luberriaga, CUIT 20-30347010-8, Charlone 1448 Depto 408, CABA (C1427), Argentina.</p>
+      <p>Estas Condiciones regulan el acceso y uso de <b>NexIA</b>, un CRM con inteligencia artificial para distribuidores de venta directa y multinivel (la "Plataforma"), en app.nexia.talenio.tech y sitios relacionados. Al crear una cuenta o usar la Plataforma, aceptás estas Condiciones.</p>
+      <h4>1. Qué es NexIA</h4>
+      <p>NexIA organiza el negocio del distribuidor: prospectos y clientes, pipeline de venta y auspicio, recordatorios de recompra, gestión de la red multinivel y funciones asistidas por IA (priorización "Tu día", generación de mensajes, análisis de red y motor de reactivación por beneficios bancarios). NexIA es una herramienta de software; <b>no</b> es una oportunidad de negocio, no vende productos de terceros ni garantiza resultados comerciales, ingresos ni crecimiento de red.</p>
+      <h4>2. Cuentas y planes</h4>
+      <ul>
+        <li>Debés ser mayor de edad y brindar información veraz. Sos responsable de tus credenciales y de la actividad de tu cuenta.</li>
+        <li>Planes: <b>Distribuidor</b> (USD 18/usuario·mes) y <b>Distribuidor + Patrocinio</b> (USD 25/usuario·mes), en dólares, por usuario y por mes; pueden actualizarse con aviso previo.</li>
+        <li>En planes con jerarquía (RBAC), el rol líder puede acceder, según permisos, a información agregada de su organización.</li>
+      </ul>
+      <h4>3. Uso aceptable</h4>
+      <p>Te comprometés a usar NexIA conforme a la ley y a no: enviar comunicaciones no solicitadas (spam) ni violar las políticas de WhatsApp u otras plataformas; cargar datos de terceros sin base legal; usar la Plataforma para fines engañosos, fraudulentos o ilícitos; vulnerar la seguridad, revender o hacer ingeniería inversa del servicio.</p>
+      <h4>4. Datos que cargás</h4>
+      <p>Sos responsable de los datos de prospectos, clientes y red que ingresás, y declarás contar con base legal para tratarlos. NexIA actúa como encargado del tratamiento respecto de esos datos, conforme a la Política de privacidad.</p>
+      <h4>5. Funciones de IA</h4>
+      <p>Las sugerencias generadas por IA son <b>asistencias orientativas</b> y pueden contener errores. Vos revisás y decidís antes de contactar a un cliente, enviar un mensaje o tomar cualquier acción. NexIA no se responsabiliza por decisiones comerciales basadas en estas sugerencias.</p>
+      <h4>6. Integraciones de terceros</h4>
+      <p>NexIA puede integrarse con servicios de terceros (WhatsApp, back-office de la empresa cuyos productos comercializás, etc.), que se rigen por sus propios términos. No somos responsables de su disponibilidad ni funcionamiento.</p>
+      <h4>7. Propiedad intelectual</h4>
+      <p>NexIA, su marca, software y diseño son de su titular. Te otorgamos una licencia limitada, no exclusiva e intransferible para usar la Plataforma mientras tu suscripción esté vigente. Tus datos siguen siendo tuyos.</p>
+      <h4>8. Cancelación y suspensión</h4>
+      <p>Podés cancelar cuando quieras (ver Política de reembolso). Podemos suspender o dar de baja cuentas que incumplan estas Condiciones o representen un riesgo.</p>
+      <h4>9. Garantías y responsabilidad</h4>
+      <p>La Plataforma se ofrece "tal cual" y "según disponibilidad". En la medida permitida por la ley, no garantizamos que sea ininterrumpida o libre de errores, ni resultados de negocio. Nuestra responsabilidad total se limita al monto abonado por vos en los últimos 3 meses.</p>
+      <h4>10. Cambios y ley aplicable</h4>
+      <p>Podemos actualizar estas Condiciones; avisaremos los cambios relevantes. Se rigen por las leyes de la República Argentina, con jurisdicción en los tribunales de la Ciudad Autónoma de Buenos Aires.</p>
+    </div>
+  </details>
+
+  <details id="privacidad">
+    <summary>Política de privacidad</summary>
+    <div class="legal-body">
+      <p class="legal-upd">Última actualización: 16 de agosto de 2026 · Responsable: Pablo Ezequiel Luberriaga, CUIT 20-30347010-8, Charlone 1448 Depto 408, CABA (C1427), Argentina.</p>
+      <p>En <b>NexIA</b> nos tomamos en serio la privacidad. Esta política explica qué datos tratamos, con qué fin y qué derechos tenés.</p>
+      <h4>1. Roles</h4>
+      <p>Respecto de tus datos de cuenta (nombre, email, facturación, uso), NexIA es <b>responsable del tratamiento</b>. Respecto de los datos de prospectos, clientes y red que cargás, NexIA es <b>encargado</b>: los procesa siguiendo tus instrucciones para prestarte el servicio.</p>
+      <h4>2. Qué datos tratamos</h4>
+      <ul>
+        <li><b>De tu cuenta:</b> nombre, email, teléfono, rol, plan y datos de facturación.</li>
+        <li><b>De tu operación:</b> prospectos y clientes (nombre, contacto, banco/medio de pago, productos, historial), tu red, tareas y notas.</li>
+        <li><b>De uso:</b> registros técnicos, dispositivo, métricas de uso y errores.</li>
+      </ul>
+      <h4>3. Para qué los usamos</h4>
+      <ul>
+        <li>Prestar el servicio: pipeline, recordatorios de recompra, gestión de red y reportes.</li>
+        <li>Funciones de IA: priorizar tu día, redactar borradores de mensajes, analizar tu red y cruzar promociones bancarias con clientes para sugerir oportunidades.</li>
+        <li>Facturación, soporte, seguridad, prevención de fraude y cumplimiento legal.</li>
+      </ul>
+      <h4>4. IA y proveedores</h4>
+      <p>Para las funciones de IA, ciertos textos y datos necesarios pueden enviarse a proveedores de modelos de IA que actúan como subencargados, bajo confidencialidad y solo para generar la respuesta solicitada. No usamos tus datos de clientes para entrenar modelos de terceros y minimizamos los datos enviados.</p>
+      <h4>5. Con quién los compartimos</h4>
+      <p>No vendemos tus datos. Podemos compartirlos con proveedores de infraestructura, procesadores de pago, proveedores de IA y mensajería, y autoridades cuando la ley lo exija. En planes con jerarquía, tu líder puede ver información agregada según los permisos configurados.</p>
+      <h4>6. Conservación</h4>
+      <p>Conservamos los datos mientras tu cuenta esté activa y por los plazos legales aplicables. Al cerrar la cuenta, los eliminamos o anonimizamos en un plazo razonable, salvo obligación legal de conservarlos.</p>
+      <h4>7. Seguridad</h4>
+      <p>Aplicamos medidas técnicas y organizativas razonables (cifrado en tránsito, control de accesos, backups). Ningún sistema es 100% infalible.</p>
+      <h4>8. Tus derechos</h4>
+      <p>Podés acceder, rectificar, actualizar, portar o solicitar la eliminación de tus datos, y oponerte a ciertos tratamientos, escribiéndonos. En Argentina, la Agencia de Acceso a la Información Pública (AAIP) es la autoridad de control (Ley 25.326).</p>
+      <h4>9. Datos de terceros</h4>
+      <p>Al cargar datos de prospectos y clientes, declarás tener base legal para tratarlos e informarles cómo usás su información. El cumplimiento frente a esas personas es tu responsabilidad como distribuidor.</p>
+      <h4>10. Cambios</h4>
+      <p>Podemos actualizar esta política; avisaremos los cambios relevantes en la app o por email.</p>
+    </div>
+  </details>
+
+  <details id="reembolso">
+    <summary>Política de reembolso</summary>
+    <div class="legal-body">
+      <p class="legal-upd">Última actualización: 16 de agosto de 2026 · Titular: Pablo Ezequiel Luberriaga, CUIT 20-30347010-8.</p>
+      <p>Esta política explica pagos, cancelaciones y reembolsos de las suscripciones a <b>NexIA</b>.</p>
+      <h4>1. Suscripciones</h4>
+      <p>NexIA se ofrece por suscripción mensual, por usuario, en dólares: <b>Distribuidor</b> (USD 18/usuario·mes) y <b>Distribuidor + Patrocinio</b> (USD 25/usuario·mes). Se renueva automáticamente cada período hasta que la canceles.</p>
+      <h4>2. Cancelación</h4>
+      <p>Podés cancelar cuando quieras desde tu cuenta o escribiéndonos. La cancelación detiene las renovaciones futuras: conservás el acceso hasta el final del período ya pagado y no se te vuelve a cobrar.</p>
+      <h4>3. Garantía de 14 días (primer pago)</h4>
+      <p>Si es tu primera suscripción y no quedás conforme, podés pedir el reembolso completo dentro de los 14 días del primer cobro.</p>
+      <h4>4. Renovaciones y períodos iniciados</h4>
+      <p>Fuera del plazo de garantía, los pagos de períodos ya iniciados no son reembolsables, aunque dejes de usar el servicio antes de fin de mes. Un cobro por error evidente (por ejemplo, doble cobro) se corrige.</p>
+      <h4>5. Cobros duplicados o errores</h4>
+      <p>Si detectás un cobro duplicado, monto incorrecto o error de facturación, avisanos dentro de los 30 días; si corresponde, reintegramos la diferencia.</p>
+      <h4>6. Cómo pedir un reembolso</h4>
+      <p>Escribinos por WhatsApp al +54 9 11 4056 6256 indicando el email de tu cuenta y el motivo. Respondemos dentro de los 5 días hábiles. Los reembolsos aprobados se acreditan por el medio de pago original; el plazo depende de tu banco o procesador.</p>
+      <h4>7. Casos sin reembolso</h4>
+      <ul>
+        <li>Suspensiones o bajas por incumplimiento de las Condiciones de servicio.</li>
+        <li>Falta de uso durante un período ya abonado.</li>
+        <li>Servicios de terceros integrados, regidos por sus propias políticas.</li>
+      </ul>
+      <div class="legal-card">¿Necesitás una cancelación o reembolso? Escribinos por <a href="https://wa.me/5491140566256" target="_blank" rel="noreferrer">WhatsApp al +54 9 11 4056 6256</a>.</div>
+    </div>
+  </details>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="foot-legal"><a href="#condiciones">Condiciones de servicio</a><a href="#privacidad">Política de privacidad</a><a href="#reembolso">Política de reembolso</a></div>
+  <div class="foot">
+  <div class="logo">
+    <span class="mark"><svg width="22" height="22" viewBox="0 0 64 64"><g stroke="#fff" stroke-width="1.7" opacity=".55" stroke-linecap="round"><line x1="32" y1="29" x2="12" y2="12"/><line x1="32" y1="29" x2="8" y2="34"/><line x1="32" y1="29" x2="22" y2="52"/><line x1="32" y1="29" x2="52" y2="42"/><line x1="12" y1="12" x2="44" y2="10"/><line x1="52" y1="42" x2="54" y2="20"/><line x1="22" y1="52" x2="52" y2="42"/></g><circle cx="12" cy="12" r="4.5" fill="#fff"/><circle cx="44" cy="10" r="3" fill="#fff"/><circle cx="8" cy="34" r="3" fill="#fff"/><circle cx="22" cy="52" r="3.5" fill="#fff"/><circle cx="54" cy="20" r="2.4" fill="#fff"/><circle cx="52" cy="42" r="4.2" fill="#B6FF00"/><rect x="24" y="22" width="16" height="13" rx="5" fill="#14181F" stroke="#fff" stroke-width="3"/><path d="M29 35 L29 41 L35 35 Z" fill="#fff"/><circle cx="32" cy="28" r="1.7" fill="#B6FF00"/></svg></span>
+    NexIA
+  </div>
+  <small>El CRM con IA para distribuidores de venta directa y multinivel.</small>
+  <small>© 2026 NexIA · Pablo Ezequiel Luberriaga · CUIT 20-30347010-8 · Charlone 1448 Depto 408, CABA (C1427), Argentina</small>
+</div></div></footer>
+
+<script>
+(function(){function openHash(){var h=location.hash.replace('#','');if(!h)return;var el=document.getElementById(h);if(el&&el.tagName==='DETAILS'){el.open=true;setTimeout(function(){el.scrollIntoView({behavior:'smooth',block:'start'});},30);}}window.addEventListener('load',openHash);window.addEventListener('hashchange',openHash);})();
+</script>
+</body>
+</html>
